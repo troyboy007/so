@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Death: The Social Universe</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            background-color: #0d0d1a; /* Dark background */
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #6a057e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8e2de2;
+        }
+
+        /* Abstract Gradient Animation for Hero Section */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animate-gradient {
+            background: linear-gradient(270deg, #1a1a2e, #0f0c29, #311c52, #471a5a, #6a057e);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        /* Pulse animation for buttons/nodes */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(138, 43, 226, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(138, 43, 226, 0); }
+        }
+        .animate-pulse-custom {
+            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+
+        /* Modal specific styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+            backdrop-filter: blur(8px); /* Blur background */
+            -webkit-backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: #1a1a2e;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+            max-width: 700px;
+            width: 90%;
+            color: #e0e0e0;
+            position: relative;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: modalFadeIn 0.3s forwards;
+        }
+
+        @keyframes modalFadeIn {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close-button {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close-button:hover,
+        .modal-close-button:focus {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Content Loading Spinner */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #8e2de2;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Slider track styling */
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px; /* Thickness of the track */
+            background: linear-gradient(to right, #6a057e, #8e2de2, #ee2a7b); /* Gradient track */
+            border-radius: 5px;
+            outline: none;
+            transition: opacity .2s;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px; /* Size of the thumb */
+            height: 20px;
+            border-radius: 50%;
+            background: #fff; /* White thumb */
+            cursor: grab;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            transition: background .2s ease-in-out;
+        }
+        input[type="range"]::-webkit-slider-thumb:active {
+            cursor: grabbing;
+            background: #8e2de2; /* Change color when active */
+        }
+
+        /* Abstract visual elements for negative impact section */
+        .fragmented-shape {
+            position: absolute;
+            background: rgba(255, 0, 0, 0.3); /* Reddish tint for negative */
+            border-radius: 50%;
+            filter: blur(10px);
+            opacity: 0.5;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+
+        .shape-1 { top: 10%; left: 15%; width: 80px; height: 80px; animation-delay: 0s; }
+        .shape-2 { top: 30%; right: 20%; width: 120px; height: 120px; animation-delay: 2s; background: rgba(255, 255, 0, 0.3); } /* Yellowish tint */
+        .shape-3 { bottom: 20%; left: 25%; width: 100px; height: 100px; animation-delay: 4s; }
+        .shape-4 { top: 60%; left: 5%; width: 70px; height: 70px; animation-delay: 6s; background: rgba(0, 255, 255, 0.3); } /* Cyan tint */
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(10px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+
+        /* Data stream animation for privacy section */
+        .data-stream-container {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .data-stream {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(138, 43, 226, 0.2), /* Light purple */
+                rgba(138, 43, 226, 0.2) 10px,
+                transparent 10px,
+                transparent 20px
+            );
+            background-size: 200% 200%;
+            animation: stream-flow 20s linear infinite;
+        }
+        @keyframes stream-flow {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 200%; }
+        }
+
+        /* Card flip effect for wellbeing section */
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 200px; /* Fixed height for consistency */
+            perspective: 1000px; /* 3D effect */
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Hide back of the card */
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .flip-card-front {
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            z-index: 2;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, #ee2a7b, #ff6c6c);
+            transform: rotateY(180deg);
+        }
+
+        /* Scroll-triggered animation styles */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Styling for the slider value indicator */
+        .slider-value-indicator {
+            position: absolute;
+            bottom: -30px; /* Position below the slider */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #8e2de2;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none; /* Allow clicks through */
+        }
+        input[type="range"]:active + .slider-value-indicator,
+        input[type="range"]:focus + .slider-value-indicator {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="text-gray-100 antialiased">
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-90 z-[9999]">
+        <div class="spinner"></div>
+        <p class="ml-4 text-xl text-purple-400">Generating digital insights...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-gradient-to-r from-purple-900 to-indigo-900 bg-opacity-70 backdrop-blur-sm z-50 p-4 shadow-lg rounded-b-xl">
+        <nav class="container mx-auto flex justify-between items-center px-4">
+            <h1 class="text-3xl font-extrabold text-white">💀 Digital Death</h1>
+            <div class="text-white text-lg hidden sm:block">
+                The Social Universe: Mapping Our Feelings
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section: Dynamic Opening - "Your Digital Data" -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center text-center p-6 animate-gradient overflow-hidden">
+        <div class="absolute inset-0">
+            <!-- Abstract background elements, e.g., pulsating circles or moving lines -->
+            <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-500 rounded-full mix-blend-screen opacity-30 animate-pulse-custom"></div>
+            <div class="absolute bottom-1/3 right-1/4 w-48 h-48 bg-blue-500 rounded-full mix-blend-screen opacity-30 animate-pulse-custom animation-delay-2000"></div>
+            <div class="absolute top-1/2 right-1/10 w-24 h-24 bg-pink-500 rounded-full mix-blend-screen opacity-30 animate-pulse-custom animation-delay-4000"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <h2 class="text-6xl md:text-7xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg">
+                YOUR DIGITAL DATA
+            </h2>
+            <p id="hero-intro-text" class="text-2xl md:text-3xl text-gray-200 mb-10 leading-relaxed"></p>
+            <button id="start-exploring-btn" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-4 px-8 rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out animate-pulse-custom">
+                🔵 START EXPLORING
+            </button>
+        </div>
+    </section>
+
+    <!-- Section 2: "Connecting Echoes: Positive Data Patterns" -->
+    <section id="positive-impacts" class="min-h-screen bg-gradient-to-br from-indigo-900 to-purple-900 p-8 md:p-16 flex flex-col justify-center items-center text-center relative overflow-hidden reveal-on-scroll">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <!-- Abstract interconnected nodes visual -->
+            <div class="absolute top-10 left-10 w-24 h-24 bg-green-400 rounded-full mix-blend-lighten animate-pulse-custom"></div>
+            <div class="absolute bottom-20 right-20 w-32 h-32 bg-yellow-400 rounded-full mix-blend-lighten animate-pulse-custom animation-delay-1000"></div>
+            <div class="absolute top-1/2 left-1/3 w-28 h-28 bg-blue-400 rounded-full mix-blend-lighten animate-pulse-custom animation-delay-2000"></div>
+            <div class="absolute bottom-10 left-1/4 w-40 h-40 bg-pink-400 rounded-full mix-blend-lighten animate-pulse-custom animation-delay-3000"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto">
+            <h2 class="text-5xl md:text-6xl font-extrabold text-green-300 mb-10 drop-shadow-lg">
+                🌿 Connecting Echoes: Positive Data Patterns
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
+                Within the social universe, our data weaves patterns of connection and positive shared experiences. Tap a card to explore how.
+            </p>
+
+            <div id="positive-impacts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mt-8">
+                <!-- Content will be injected here by JavaScript -->
+            </div>
+        </div>
+        <!-- Modal for Positive Impacts -->
+        <div id="positiveImpactModal" class="modal">
+            <div class="modal-content">
+                <span class="modal-close-button">&times;</span>
+                <h3 id="positive-modal-title" class="text-3xl font-bold mb-4 text-green-300"></h3>
+                <p id="positive-modal-text" class="text-lg leading-relaxed mb-4"></p>
+                <p id="positive-modal-fact" class="text-green-200 text-md italic"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: "Data Shadows: Unseen Digital Risks" -->
+    <section id="negative-impacts" class="min-h-screen bg-gradient-to-br from-red-900 to-purple-900 p-8 md:p-16 flex flex-col justify-center items-center text-center relative overflow-hidden reveal-on-scroll">
+        <div id="negative-shapes-container" class="absolute inset-0 z-0">
+            <!-- Shapes controlled by JS to change with slider -->
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto">
+            <h2 class="text-5xl md:text-6xl font-extrabold text-red-300 mb-10 drop-shadow-lg">
+                🚨 Data Shadows: Unseen Digital Risks
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
+                Our digital footprint can reveal vulnerabilities, creating challenges in the vast social universe. Use the slider to reveal different risks.
+            </p>
+
+            <div class="bg-gray-800 bg-opacity-70 p-8 rounded-xl shadow-xl mb-10 relative">
+                <h3 class="text-3xl font-bold text-white mb-6">Risk Categories</h3>
+                <input type="range" id="impact-slider" min="0" max="0" value="0" step="1" class="w-full h-2 rounded-lg appearance-none cursor-pointer">
+                <div id="slider-value-label" class="slider-value-indicator"></div>
+                <div class="flex justify-between text-lg text-gray-300 mt-4">
+                    <span id="label-0">Privacy Breaches</span>
+                    <span id="label-1">Algorithmic Bias</span>
+                    <span id="label-2">Digital Misinformation</span>
+                </div>
+            </div>
+
+            <div id="negative-impact-display" class="bg-gray-800 bg-opacity-70 p-8 rounded-xl shadow-xl max-w-3xl mx-auto min-h-[300px] flex flex-col justify-center">
+                <!-- Content will be dynamically updated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: "The Data Afterlife: Your Digital Legacy" -->
+    <section id="privacy-data" class="min-h-screen bg-gradient-to-br from-blue-900 to-indigo-900 p-8 md:p-16 flex flex-col justify-center items-center text-center relative overflow-hidden reveal-on-scroll">
+        <div class="absolute inset-0 z-0 opacity-10">
+            <div class="data-stream-container">
+                <div class="data-stream"></div>
+            </div>
+        </div>
+        <div class="relative z-10 max-w-5xl mx-auto">
+            <h2 class="text-5xl md:text-6xl font-extrabold text-blue-300 mb-10 drop-shadow-lg">
+                🕵️‍♀️ The Data Afterlife: Your Digital Legacy
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
+                What happens to your data when you're no longer actively online? Understanding this 'digital afterlife' is crucial for managing your legacy. Tap a term to reveal its meaning.
+            </p>
+
+            <div id="privacy-terms-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-8">
+                <!-- Content will be injected here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Modal for Privacy Terms -->
+        <div id="privacyModal" class="modal">
+            <div class="modal-content">
+                <span class="modal-close-button">&times;</span>
+                <h3 id="modal-term-title" class="text-3xl font-bold mb-4 text-purple-300"></h3>
+                <p id="modal-term-explanation" class="text-lg leading-relaxed"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: "Emotional Cartography: Mapping Feelings in the Social Universe" -->
+    <section id="wellbeing-strategies" class="min-h-screen bg-gradient-to-br from-emerald-900 to-teal-900 p-8 md:p-16 flex flex-col justify-center items-center text-center relative overflow-hidden reveal-on-scroll">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <!-- Abstract bloom-like patterns -->
+            <div class="absolute top-10 left-10 w-40 h-40 bg-teal-300 rounded-full mix-blend-lighten opacity-50 animate-pulse-custom animation-delay-500"></div>
+            <div class="absolute bottom-20 right-20 w-52 h-52 bg-emerald-300 rounded-full mix-blend-lighten opacity-50 animate-pulse-custom animation-delay-1500"></div>
+            <div class="absolute top-1/3 right-1/4 w-32 h-32 bg-cyan-300 rounded-full mix-blend-lighten opacity-50 animate-pulse-custom animation-delay-2500"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto">
+            <h2 class="text-5xl md:text-6xl font-extrabold text-emerald-300 mb-10 drop-shadow-lg">
+                🌱 Emotional Cartography: Mapping Feelings in the Social Universe
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
+                Navigate the emotional currents of the social universe. These strategies help you map and manage your feelings for a healthier digital journey. Hover over the cards to reveal practical tips.
+            </p>
+
+            <div id="wellbeing-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mt-8">
+                <!-- Content will be injected here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion Section: "Your Digital Legacy" -->
+    <section id="conclusion" class="min-h-[50vh] bg-gradient-to-br from-gray-900 to-black p-8 md:p-16 flex flex-col justify-center items-center text-center relative overflow-hidden reveal-on-scroll">
+        <div class="absolute inset-0 z-0 opacity-10">
+            <!-- Abstract light source / nebula effect -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-white rounded-full mix-blend-overlay opacity-30 blur-3xl animate-pulse-custom"></div>
+        </div>
+        <div class="relative z-10 max-w-3xl mx-auto">
+            <h2 class="text-5xl md:text-6xl font-extrabold text-white mb-10 drop-shadow-lg">
+                ✨ Your Digital Legacy
+            </h2>
+            <p id="conclusion-text" class="text-xl md:text-2xl text-gray-300 leading-relaxed mb-8"></p>
+            <p class="text-lg md:text-xl text-gray-400">
+                Understand your data. Control your narrative. Shape your future.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-500 py-6 text-center text-sm rounded-t-xl">
+        <div class="container mx-auto px-4">
+            © 2025 Digital Death - The Social Universe Project
+            <br>
+            <span class="text-xs">Conceptual preview for academic assignment purposes.</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.style.display = 'flex'; // Show loading overlay
+
+            let chatHistory = [];
+            const prompt = `Generate highly engaging, concise, and relatable content for a single-page website.
+            Website Name: "Digital Death"
+            Main Title: "Your Digital Data"
+            Theme/Idea: "The Social Universe: Mapping Our Feelings" - Focus on how digital interactions and data reflect or influence our emotional states and connections within online spaces. Explore concepts like emotional contagion, digital empathy, collective sentiment, and the lasting impact of online emotional expressions. The content should be designed for quick comprehension on the main page, with more detailed information accessible through interactive elements.
+
+            The content should be structured as follows in a JSON format:
+            - **introduction**: A compelling, concise opening paragraph (approx. 30-50 words) for the hero section, introducing the concept of digital data and mapped feelings in the social universe. Make it highly relatable.
+            - **positive_impacts**: An array of 3-4 objects, each describing a positive impact related to mapping feelings or positive data patterns. Each object should have:
+                - 'title': (e.g., "Collective Empathy")
+                - 'summary': A very brief, engaging summary (approx. 15-25 words) for the main card.
+                - 'text': A more detailed paragraph (approx. 50-70 words) for the modal.
+                - 'fact': A concise, impactful statistic or example.
+            - **negative_impacts**: An array of 3 objects, each describing a negative impact related to digital risks or emotional vulnerabilities. Each object should have:
+                - 'title': (e.g., "Sentiment Manipulation")
+                - 'summary': A very brief, engaging summary (approx. 15-25 words) for the main slider display.
+                - 'text': A more detailed paragraph (approx. 60-80 words) for the full display.
+                - 'quote': A concise, impactful quote (simulating a user experience or expert opinion).
+            - **privacy_data**: An array of 2-3 objects explaining key privacy/data terms related to digital legacy or data afterlife. Each object should have:
+                - 'term': (e.g., "Algorithmic Echoes")
+                - 'summary': A very brief, engaging summary (approx. 15-25 words) for the main card.
+                - 'explanation': A more detailed explanation (approx. 40-60 words) for the modal.
+            - **wellbeing_strategies**: An array of 3-4 objects, each providing a practical strategy for emotional cartography or managing feelings in the social universe. Each object should have:
+                - 'tip_title': (e.g., "Emotional Filtering")
+                - 'tip_summary': A very brief, engaging summary (approx. 15-25 words) for the front of the flip card.
+                - 'tip_description': A more detailed explanation (approx. 40-60 words) for the back of the flip card.
+            - **conclusion**: An empowering, concise concluding paragraph (approx. 30-50 words) about understanding your digital legacy and shaping your future. Make it highly relatable.
+
+            Ensure the language is approachable, analytical, creative, and imaginative. Focus on key ideas presented simply on the main page, with depth available through interaction. Use academic language appropriate for a Year 11 English context.`;
+
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+            const payload = {
+                contents: chatHistory,
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            "introduction": { "type": "STRING" },
+                            "positive_impacts": {
+                                "type": "ARRAY",
+                                "items": {
+                                    "type": "OBJECT",
+                                    "properties": {
+                                        "title": { "type": "STRING" },
+                                        "summary": { "type": "STRING" },
+                                        "text": { "type": "STRING" },
+                                        "fact": { "type": "STRING" }
+                                    }
+                                }
+                            },
+                            "negative_impacts": {
+                                "type": "ARRAY",
+                                "items": {
+                                    "type": "OBJECT",
+                                    "properties": {
+                                        "title": { "type": "STRING" },
+                                        "summary": { "type": "STRING" },
+                                        "text": { "type": "STRING" },
+                                        "quote": { "type": "STRING" }
+                                    }
+                                }
+                            },
+                            "privacy_data": {
+                                "type": "ARRAY",
+                                "items": {
+                                    "type": "OBJECT",
+                                    "properties": {
+                                        "term": { "type": "STRING" },
+                                        "summary": { "type": "STRING" },
+                                        "explanation": { "type": "STRING" }
+                                    }
+                                }
+                            },
+                            "wellbeing_strategies": {
+                                "type": "ARRAY",
+                                "items": {
+                                    "type": "OBJECT",
+                                    "properties": {
+                                        "tip_title": { "type": "STRING" },
+                                        "tip_summary": { "type": "STRING" },
+                                        "tip_description": { "type": "STRING" }
+                                    }
+                                }
+                            },
+                            "conclusion": { "type": "STRING" }
+                        }
+                    }
+                }
+            };
+
+            const apiKey = ""; // Canvas will provide this at runtime
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            // Initialize pageContent with default empty arrays and placeholder text
+            // This ensures that even if the API call completely fails, the script doesn't throw errors
+            let pageContent = {
+                introduction: "Dive into the unseen forces shaping your online world. What emotions does your data truly reflect?",
+                positive_impacts: [],
+                negative_impacts: [],
+                privacy_data: [],
+                wellbeing_strategies: [],
+                conclusion: "Understand your data. Control your narrative. Shape your future."
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const jsonString = result.candidates[0].content.parts[0].text;
+                    
+                    if (typeof jsonString === 'string' && jsonString.length > 0) {
+                        console.log("Raw JSON string received:", jsonString); // Log the raw JSON string for debugging
+                        try {
+                            // Attempt to parse the JSON string
+                            const parsedContent = JSON.parse(jsonString);
+                            
+                            // Assign parsed content, using defaults if a property is missing in the parsed object
+                            Object.assign(pageContent, {
+                                introduction: parsedContent.introduction || pageContent.introduction,
+                                positive_impacts: parsedContent.positive_impacts || [],
+                                negative_impacts: parsedContent.negative_impacts || [],
+                                privacy_data: parsedContent.privacy_data || [],
+                                wellbeing_strategies: parsedContent.wellbeing_strategies || [],
+                                conclusion: parsedContent.conclusion || pageContent.conclusion
+                            });
+                            console.log("Generated Content:", pageContent); // Log for debugging
+
+                            // Populate Hero Section
+                            document.getElementById('hero-intro-text').textContent = pageContent.introduction;
+
+                            // Positive Impacts Section
+                            const positiveImpactsContainer = document.getElementById('positive-impacts-container');
+                            const positiveImpactModal = document.getElementById('positiveImpactModal');
+                            const positiveModalTitle = document.getElementById('positive-modal-title');
+                            const positiveModalText = document.getElementById('positive-modal-text');
+                            const positiveModalFact = document.getElementById('positive-modal-fact');
+                            const closePositiveModalBtn = positiveImpactModal.querySelector('.modal-close-button');
+
+                            if (pageContent.positive_impacts.length > 0) {
+                                positiveImpactsContainer.innerHTML = pageContent.positive_impacts.map((impact, index) => `
+                                    <div class="bg-indigo-800 bg-opacity-70 p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer group relative overflow-hidden positive-impact-card" data-impact-index="${index}">
+                                        <div class="absolute inset-0 bg-gradient-to-br from-green-500 to-blue-500 opacity-20 group-hover:opacity-40 transition-opacity duration-300 rounded-xl"></div>
+                                        <h3 class="text-2xl font-bold text-green-300 mb-2 relative z-10">${impact.title || 'Untitled'}</h3>
+                                        <p class="text-gray-200 text-base relative z-10">${impact.summary || 'Summary not available.'}</p>
+                                        <p class="text-green-200 text-sm italic mt-2 relative z-10">Tap for more.</p>
+                                    </div>
+                                `).join('');
+
+                                document.querySelectorAll('.positive-impact-card').forEach(card => {
+                                    card.addEventListener('click', (event) => {
+                                        const index = parseInt(event.currentTarget.dataset.impactIndex);
+                                        if (pageContent.positive_impacts.length > index) {
+                                            const impactData = pageContent.positive_impacts[index];
+                                            positiveModalTitle.textContent = impactData.title || 'Details';
+                                            positiveModalText.textContent = impactData.text || 'No detailed text available.';
+                                            positiveModalFact.textContent = `Fact: ${impactData.fact || 'No fact available.'}`;
+                                            positiveImpactModal.style.display = 'flex';
+                                        }
+                                    });
+                                });
+                            } else {
+                                console.warn("Positive impacts data is empty or malformed.");
+                                positiveImpactsContainer.innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Positive impacts content could not be loaded. Please try again.</p>`;
+                            }
+
+                            closePositiveModalBtn.onclick = () => positiveImpactModal.style.display = 'none';
+
+                            // Negative Impacts Section
+                            const negativeImpactDisplay = document.getElementById('negative-impact-display');
+                            const impactSlider = document.getElementById('impact-slider');
+                            const sliderValueLabel = document.getElementById('slider-value-label');
+                            const negativeShapesContainer = document.getElementById('negative-shapes-container');
+
+                            // Dynamically set max for slider based on actual data
+                            if (pageContent.negative_impacts.length > 0) {
+                                impactSlider.max = pageContent.negative_impacts.length - 1;
+                                impactSlider.disabled = false; // Enable slider
+                            } else {
+                                impactSlider.max = 0; // No impacts, so slider won't move
+                                impactSlider.disabled = true; // Disable slider if no data
+                            }
+
+                            function updateNegativeImpactDisplay(index) {
+                                if (pageContent.negative_impacts.length > index) {
+                                    const impact = pageContent.negative_impacts[index];
+                                    negativeImpactDisplay.innerHTML = `
+                                        <h3 class="text-3xl font-bold text-red-300 mb-4">${impact.title || 'Untitled'}</h3>
+                                        <p class="text-gray-200 text-lg mb-6">${impact.text || 'No detailed text available.'}</p>
+                                        <p class="text-red-200 text-xl italic mt-auto">
+                                            "${impact.quote || 'No quote available.'}"
+                                        </p>
+                                    `;
+                                    // Update slider value label
+                                    sliderValueLabel.textContent = impact.title || '';
+                                    // Dynamically position slider value label
+                                    requestAnimationFrame(() => {
+                                        const sliderRect = impactSlider.getBoundingClientRect();
+                                        const thumbWidth = 20; // Approximate thumb width
+                                        const value = parseInt(impactSlider.value);
+                                        const max = parseInt(impactSlider.max);
+                                        let thumbPositionPx = 0;
+                                        if (max > 0) {
+                                            thumbPositionPx = (sliderRect.width - thumbWidth) * (value / max) + (thumbWidth / 2);
+                                        } else {
+                                            // Handle case where max is 0 (only one item or no items)
+                                            thumbPositionPx = sliderRect.width / 2; // Center label
+                                        }
+                                        sliderValueLabel.style.left = `${thumbPositionPx}px`;
+                                        sliderValueLabel.style.transform = `translateX(-50%)`;
+                                    });
+
+
+                                    // Update fragmented shapes (example: change color/opacity based on impact index)
+                                    negativeShapesContainer.innerHTML = ''; // Clear previous shapes
+                                    const colors = ['rgba(255, 0, 0, 0.3)', 'rgba(255, 165, 0, 0.3)', 'rgba(255, 69, 0, 0.3)']; // Red, Orange, Red-Orange
+                                    const positions = [
+                                        { top: '10%', left: '15%', width: '80px', height: '80px', 'animation-delay': '0s' },
+                                        { top: '30%', right: '20%', width: '120px', height: '120px', 'animation-delay': '2s' },
+                                        { bottom: '20%', left: '25%', width: '100px', height: '100px', 'animation-delay': '4s' },
+                                        { top: '60%', left: '5%', width: '70px', height: '70px', 'animation-delay': '6s' }
+                                    ];
+                                    for(let i = 0; i < Math.min(3, pageContent.negative_impacts.length); i++) { // Show up to 3 shapes
+                                        const shapeDiv = document.createElement('div');
+                                        shapeDiv.className = 'fragmented-shape';
+                                        Object.assign(shapeDiv.style, positions[i]);
+                                        shapeDiv.style.backgroundColor = colors[index % colors.length]; // Cycle colors
+                                        negativeShapesContainer.appendChild(shapeDiv);
+                                    }
+
+                                } else {
+                                    console.warn(`Attempted to access negative impact at index ${index}, but data is not available.`);
+                                    negativeImpactDisplay.innerHTML = `<p class="text-red-400 text-lg">Content not available for this selection.</p>`;
+                                }
+                            }
+                            
+                            // Initialize slider and content
+                            impactSlider.oninput = (event) => updateNegativeImpactDisplay(parseInt(event.target.value));
+                            if (pageContent.negative_impacts.length > 0) {
+                                updateNegativeImpactDisplay(0);
+                            } else {
+                                negativeImpactDisplay.innerHTML = `<p class="text-red-400 text-lg">Negative impacts content could not be loaded.</p>`;
+                            }
+
+
+                            // Populate Privacy/Data Section
+                            const privacyTermsContainer = document.getElementById('privacy-terms-container');
+                            const privacyModal = document.getElementById('privacyModal');
+                            const modalCloseBtn = privacyModal.querySelector('.modal-close-button');
+                            const modalTermTitle = document.getElementById('modal-term-title');
+                            const modalTermExplanation = document.getElementById('modal-term-explanation');
+
+                            if (pageContent.privacy_data.length > 0) {
+                                privacyTermsContainer.innerHTML = pageContent.privacy_data.map((item, index) => `
+                                    <div class="bg-blue-800 bg-opacity-70 p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer term-card" data-term-index="${index}">
+                                        <h3 class="text-2xl font-bold text-blue-300 mb-2">${item.term || 'Untitled Term'}</h3>
+                                        <p class="text-gray-200 text-base">${item.summary || 'Summary not available.'}</p>
+                                        <p class="text-blue-200 text-sm italic mt-2">Tap for more.</p>
+                                    </div>
+                                `).join('');
+
+                                document.querySelectorAll('.term-card').forEach(card => {
+                                    card.addEventListener('click', (event) => {
+                                        const index = parseInt(event.currentTarget.dataset.termIndex);
+                                        if (pageContent.privacy_data.length > index) {
+                                            const termData = pageContent.privacy_data[index];
+                                            modalTermTitle.textContent = termData.term || 'Details';
+                                            modalTermExplanation.textContent = termData.explanation || 'No detailed explanation available.';
+                                            privacyModal.style.display = 'flex';
+                                        }
+                                    });
+                                });
+                            } else {
+                                console.error("Privacy data is missing or not an array, or empty.");
+                                privacyTermsContainer.innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Privacy data content could not be loaded. Please try again.</p>`;
+                            }
+
+                            modalCloseBtn.onclick = () => privacyModal.style.display = 'none';
+                            window.onclick = (event) => {
+                                if (event.target === privacyModal || event.target === positiveImpactModal) { // Close both modals
+                                    privacyModal.style.display = 'none';
+                                    positiveImpactModal.style.display = 'none';
+                                }
+                            };
+
+                            // Populate Wellbeing Strategies Section
+                            const wellbeingCardsContainer = document.getElementById('wellbeing-cards-container');
+                            if (pageContent.wellbeing_strategies.length > 0) {
+                                wellbeingCardsContainer.innerHTML = pageContent.wellbeing_strategies.map((strategy, index) => `
+                                    <div class="flip-card">
+                                        <div class="flip-card-inner">
+                                            <div class="flip-card-front flex items-center justify-center p-4">
+                                                <h3 class="text-2xl font-bold">${strategy.tip_title || 'Untitled Tip'}</h3>
+                                                <p class="text-gray-200 text-base mt-2">${strategy.tip_summary || 'Summary not available.'}</p>
+                                            </div>
+                                            <div class="flip-card-back flex items-center justify-center p-4">
+                                                <p class="text-md leading-relaxed">${strategy.tip_description || 'No detailed description available.'}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('');
+                            } else {
+                                console.error("Wellbeing strategies data is missing or not an array, or empty.");
+                                wellbeingCardsContainer.innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Wellbeing strategies content could not be loaded. Please try again.</p>`;
+                            }
+
+                            // Populate Conclusion Section
+                            document.getElementById('conclusion-text').textContent = pageContent.conclusion;
+
+                            // Apply scroll-triggered animations
+                            const sections = document.querySelectorAll('.reveal-on-scroll');
+                            const observer = new IntersectionObserver((entries) => {
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting) {
+                                        entry.target.classList.add('active');
+                                    } else {
+                                        // Optional: remove 'active' class when out of view
+                                        // entry.target.classList.remove('active');
+                                    }
+                                });
+                            }, {
+                                threshold: 0.1 // Trigger when 10% of the section is visible
+                            });
+
+                            sections.forEach(section => {
+                                observer.observe(section);
+                            });
+
+                        } catch (jsonParseError) {
+                            console.error("Error parsing JSON response:", jsonParseError);
+                            document.getElementById('hero-intro-text').textContent = "Error: Could not parse content from the AI. The response might be incomplete. Please try refreshing.";
+                            // Fallback to default content for other sections too, if parsing fails entirely
+                            document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
+                            document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content could not be loaded.</p>`;
+                            document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
+                            document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
+                            document.getElementById('conclusion-text').textContent = "Content could not be loaded. Please try again.";
+                        }
+                    } else {
+                        console.error("API response text content is empty or not a string:", jsonString);
+                        document.getElementById('hero-intro-text').textContent = "Error: Received empty or invalid content from the AI.";
+                        // Fallback to default content for other sections too
+                        document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
+                        document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content could not be loaded.</p>`;
+                        document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
+                        document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
+                        document.getElementById('conclusion-text').textContent = "Content could not be loaded. Please try again.";
+                    }
+
+                } else {
+                    console.error("Failed to retrieve content from API response (missing candidates/parts):", result);
+                    document.getElementById('hero-intro-text').textContent = "Failed to load content. Please try again.";
+                    // Fallback to default content for other sections too
+                    document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
+                    document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content could not be loaded.</p>`;
+                    document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
+                    document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
+                    document.getElementById('conclusion-text').textContent = "Content could not be loaded. Please try again.";
+                }
+
+            } catch (error) {
+                console.error("Error fetching content:", error);
+                document.getElementById('hero-intro-text').textContent = "An error occurred while fetching content.";
+                // Fallback to default content for other sections too
+                document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
+                document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content could not be loaded.</p>`;
+                document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
+                document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
+                document.getElementById('conclusion-text').textContent = "Content could not be loaded. Please try again.";
+            } finally {
+                loadingOverlay.style.display = 'none'; // Hide loading overlay
+            }
+
+            // Smooth scrolling for "Start Exploring" button
+            document.getElementById('start-exploring-btn').addEventListener('click', () => {
+                document.getElementById('positive-impacts').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
