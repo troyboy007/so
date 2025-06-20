@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Death: The Social Universe</title>
+    <title>Social Media & Wellbeing: A Multimodal Exploration</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tone.js CDN for background music -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
             overflow-x: hidden; /* Prevent horizontal scrolling */
             background-color: #0d0d1a; /* Dark background */
+            color: #e0e0e0;
         }
 
-        /* Custom scrollbar for better aesthetics */
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -29,16 +32,22 @@
             background: #8e2de2;
         }
 
-        /* Abstract Gradient Animation for Hero Section */
+        /* Hero section specific styles */
+        .hero-background-gradient {
+            background: linear-gradient(270deg, #1a1a2e, #0f0c29, #311c52, #471a5a, #6a057e);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            transition: filter 0.5s ease-out; /* Smooth transition for blur/grayscale */
+        }
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        .animate-gradient {
-            background: linear-gradient(270deg, #1a1a2e, #0f0c29, #311c52, #471a5a, #6a057e);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+
+        /* Distortion effect on hover for hero background */
+        .hero-background-gradient:hover {
+            filter: blur(3px) grayscale(30%);
         }
 
         /* Pulse animation for buttons/nodes */
@@ -48,6 +57,44 @@
         }
         .animate-pulse-custom {
             animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #8e2de2;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Scroll-triggered animation styles */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Standard Card styling for positive impacts and privacy terms */
+        .info-card {
+            cursor: pointer;
+            transition: transform 0.3s ease-out, background-color 0.3s ease-out, box-shadow 0.3s ease-out;
+            background-color: rgba(49, 28, 82, 0.7); /* Darker purple tint */
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+        }
+        .info-card:hover {
+            transform: scale(1.05);
+            background-color: rgba(60, 35, 100, 0.8);
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.8);
         }
 
         /* Modal specific styles */
@@ -81,6 +128,8 @@
             transform: translateY(20px);
             opacity: 0;
             animation: modalFadeIn 0.3s forwards;
+            max-height: 90vh; /* Limit modal height */
+            overflow-y: auto; /* Enable scrolling within modal */
         }
 
         @keyframes modalFadeIn {
@@ -104,26 +153,12 @@
             text-decoration: none;
         }
 
-        /* Content Loading Spinner */
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #8e2de2;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         /* Slider track styling */
         input[type="range"] {
             -webkit-appearance: none;
             width: 100%;
             height: 8px; /* Thickness of the track */
-            background: linear-gradient(to right, #6a057e, #8e2de2, #ee2a7b); /* Gradient track */
+            background: linear-gradient(to right, #ee2a7b, #ff6c6c); /* Reddish gradient */
             border-radius: 5px;
             outline: none;
             transition: opacity .2s;
@@ -141,7 +176,28 @@
         }
         input[type="range"]::-webkit-slider-thumb:active {
             cursor: grabbing;
-            background: #8e2de2; /* Change color when active */
+            background: #ee2a7b; /* Change color when active */
+        }
+
+        /* Styling for the slider value indicator */
+        .slider-value-indicator {
+            position: absolute;
+            bottom: -30px; /* Position below the slider */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ee2a7b; /* Reddish tone */
+            color: white;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: none; /* Allow clicks through */
+        }
+        input[type="range"]:active + .slider-value-indicator,
+        input[type="range"]:focus + .slider-value-indicator {
+            opacity: 1;
         }
 
         /* Abstract visual elements for negative impact section */
@@ -153,43 +209,14 @@
             opacity: 0.5;
             animation: float 10s infinite ease-in-out alternate;
         }
-
         .shape-1 { top: 10%; left: 15%; width: 80px; height: 80px; animation-delay: 0s; }
-        .shape-2 { top: 30%; right: 20%; width: 120px; height: 120px; animation-delay: 2s; background: rgba(255, 255, 0, 0.3); } /* Yellowish tint */
+        .shape-2 { top: 30%; right: 20%; width: 120px; height: 120px; animation-delay: 2s; background: rgba(255, 255, 0, 0.3); }
         .shape-3 { bottom: 20%; left: 25%; width: 100px; height: 100px; animation-delay: 4s; }
-        .shape-4 { top: 60%; left: 5%; width: 70px; height: 70px; animation-delay: 6s; background: rgba(0, 255, 255, 0.3); } /* Cyan tint */
+        .shape-4 { top: 60%; left: 5%; width: 70px; height: 70px; animation-delay: 6s; background: rgba(0, 255, 255, 0.3); }
         @keyframes float {
             0% { transform: translateY(0) translateX(0); }
             50% { transform: translateY(-20px) translateX(10px); }
             100% { transform: translateY(0) translateX(0); }
-        }
-
-        /* Data stream animation for privacy section */
-        .data-stream-container {
-            position: relative;
-            width: 100%;
-            height: 150px;
-            overflow: hidden;
-            border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-        .data-stream {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                45deg,
-                rgba(138, 43, 226, 0.2), /* Light purple */
-                rgba(138, 43, 226, 0.2) 10px,
-                transparent 10px,
-                transparent 20px
-            );
-            background-size: 200% 200%;
-            animation: stream-flow 20s linear infinite;
-        }
-        @keyframes stream-flow {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 200% 200%; }
         }
 
         /* Card flip effect for wellbeing section */
@@ -199,7 +226,6 @@
             height: 200px; /* Fixed height for consistency */
             perspective: 1000px; /* 3D effect */
         }
-
         .flip-card-inner {
             position: relative;
             width: 100%;
@@ -210,11 +236,9 @@
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-
         .flip-card:hover .flip-card-inner {
             transform: rotateY(180deg);
         }
-
         .flip-card-front, .flip-card-back {
             position: absolute;
             width: 100%;
@@ -230,48 +254,36 @@
             color: white;
             box-sizing: border-box;
         }
-
         .flip-card-front {
-            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            background: linear-gradient(135deg, #4a00e0, #8e2de2); /* Purple gradient */
             z-index: 2;
         }
-
         .flip-card-back {
-            background: linear-gradient(135deg, #ee2a7b, #ff6c6c);
+            background: linear-gradient(135deg, #00b09b, #96c93d); /* Greenish gradient */
             transform: rotateY(180deg);
         }
 
-        /* Scroll-triggered animation styles */
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .reveal-on-scroll.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Styling for the slider value indicator */
-        .slider-value-indicator {
-            position: absolute;
-            bottom: -30px; /* Position below the slider */
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #8e2de2;
+        /* Music Toggle Button */
+        #music-toggle-btn {
+            background-color: #6a057e;
             color: white;
-            padding: 4px 8px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            pointer-events: none; /* Allow clicks through */
+            padding: 1rem 1.5rem;
+            border-radius: 9999px; /* Fully rounded */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        input[type="range"]:active + .slider-value-indicator,
-        input[type="range"]:focus + .slider-value-indicator {
-            opacity: 1;
+        #music-toggle-btn:hover {
+            background-color: #8e2de2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
         }
     </style>
 </head>
@@ -280,21 +292,21 @@
     <!-- Loading Overlay -->
     <div id="loading-overlay" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-90 z-[9999]">
         <div class="spinner"></div>
-        <p class="ml-4 text-xl text-purple-400">Generating digital insights...</p>
+        <p class="ml-4 text-xl text-purple-400">Loading digital insights...</p>
     </div>
 
     <!-- Header -->
     <header class="fixed top-0 left-0 w-full bg-gradient-to-r from-purple-900 to-indigo-900 bg-opacity-70 backdrop-blur-sm z-50 p-4 shadow-lg rounded-b-xl">
         <nav class="container mx-auto flex justify-between items-center px-4">
-            <h1 class="text-3xl font-extrabold text-white">💀 Digital Death</h1>
+            <h1 class="text-3xl font-extrabold text-white">📱 Digital Wellbeing</h1>
             <div class="text-white text-lg hidden sm:block">
-                The Social Universe: Mapping Our Feelings
+                Navigating Social Media's Impact
             </div>
         </nav>
     </header>
 
-    <!-- Hero Section: Dynamic Opening - "Your Digital Data" -->
-    <section id="hero" class="relative min-h-screen flex items-center justify-center text-center p-6 animate-gradient overflow-hidden">
+    <!-- Hero Section: Dynamic Opening - "The Digital Mirror" -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center text-center p-6 hero-background-gradient overflow-hidden">
         <div class="absolute inset-0">
             <!-- Abstract background elements, e.g., pulsating circles or moving lines -->
             <div class="absolute top-1/4 left-1/4 w-32 h-32 bg-purple-500 rounded-full mix-blend-screen opacity-30 animate-pulse-custom"></div>
@@ -304,16 +316,18 @@
 
         <div class="relative z-10 max-w-4xl mx-auto">
             <h2 class="text-6xl md:text-7xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg">
-                YOUR DIGITAL DATA
+                YOUR ONLINE REFLECTION
             </h2>
-            <p id="hero-intro-text" class="text-2xl md:text-3xl text-gray-200 mb-10 leading-relaxed"></p>
+            <p id="hero-intro-text" class="text-2xl md:text-3xl text-gray-200 mb-10 leading-relaxed">
+                Social media is a pervasive force in our lives, shaping how we connect, perceive ourselves, and interact with the world. This presentation delves into its profound impact on individual wellbeing, examining both its empowering potential and its inherent challenges.
+            </p>
             <button id="start-exploring-btn" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-4 px-8 rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out animate-pulse-custom">
-                🔵 START EXPLORING
+                🔍 EXPLORE THE IMPACT
             </button>
         </div>
     </section>
 
-    <!-- Section 2: "Connecting Echoes: Positive Data Patterns" -->
+    <!-- Section 2: Positive Impacts -->
     <section id="positive-impacts" class="min-h-screen bg-gradient-to-br from-indigo-900 to-purple-900 p-8 md:p-16 flex flex-col justify-center items-center text-center relative overflow-hidden reveal-on-scroll">
         <div class="absolute inset-0 z-0 opacity-20">
             <!-- Abstract interconnected nodes visual -->
@@ -325,10 +339,10 @@
 
         <div class="relative z-10 max-w-5xl mx-auto">
             <h2 class="text-5xl md:text-6xl font-extrabold text-green-300 mb-10 drop-shadow-lg">
-                🌿 Connecting Echoes: Positive Data Patterns
+                ✅ The Empowering Connection
             </h2>
             <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
-                Within the social universe, our data weaves patterns of connection and positive shared experiences. Tap a card to explore how.
+                Social media, when used mindfully, can be a powerful tool for connection, learning, and self-expression. Click on each aspect to discover its positive influence.
             </p>
 
             <div id="positive-impacts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mt-8">
@@ -346,7 +360,7 @@
         </div>
     </section>
 
-    <!-- Section 3: "Data Shadows: Unseen Digital Risks" -->
+    <!-- Section 3: Negative Impacts -->
     <section id="negative-impacts" class="min-h-screen bg-gradient-to-br from-red-900 to-purple-900 p-8 md:p-16 flex flex-col justify-center items-center text-center relative overflow-hidden reveal-on-scroll">
         <div id="negative-shapes-container" class="absolute inset-0 z-0">
             <!-- Shapes controlled by JS to change with slider -->
@@ -354,20 +368,20 @@
 
         <div class="relative z-10 max-w-5xl mx-auto">
             <h2 class="text-5xl md:text-6xl font-extrabold text-red-300 mb-10 drop-shadow-lg">
-                🚨 Data Shadows: Unseen Digital Risks
+                ❌ Navigating the Digital Shadow
             </h2>
             <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
-                Our digital footprint can reveal vulnerabilities, creating challenges in the vast social universe. Use the slider to reveal different risks.
+                The constant digital gaze and curated realities can pose significant risks to mental wellbeing. Use the slider below to explore key challenges.
             </p>
 
             <div class="bg-gray-800 bg-opacity-70 p-8 rounded-xl shadow-xl mb-10 relative">
-                <h3 class="text-3xl font-bold text-white mb-6">Risk Categories</h3>
+                <h3 class="text-3xl font-bold text-white mb-6">Explore Challenges:</h3>
                 <input type="range" id="impact-slider" min="0" max="0" value="0" step="1" class="w-full h-2 rounded-lg appearance-none cursor-pointer">
                 <div id="slider-value-label" class="slider-value-indicator"></div>
                 <div class="flex justify-between text-lg text-gray-300 mt-4">
-                    <span id="label-0">Privacy Breaches</span>
-                    <span id="label-1">Algorithmic Bias</span>
-                    <span id="label-2">Digital Misinformation</span>
+                    <span id="label-0">Mental Health Concerns</span>
+                    <span id="label-1">Self-Esteem Issues</span>
+                    <span id="label-2">Exposure to Harm</span>
                 </div>
             </div>
 
@@ -377,7 +391,7 @@
         </div>
     </section>
 
-    <!-- Section 4: "The Data Afterlife: Your Digital Legacy" -->
+    <!-- Section 4: Privacy and Digital Footprint -->
     <section id="privacy-data" class="min-h-screen bg-gradient-to-br from-blue-900 to-indigo-900 p-8 md:p-16 flex flex-col justify-center items-center text-center relative overflow-hidden reveal-on-scroll">
         <div class="absolute inset-0 z-0 opacity-10">
             <div class="data-stream-container">
@@ -386,10 +400,10 @@
         </div>
         <div class="relative z-10 max-w-5xl mx-auto">
             <h2 class="text-5xl md:text-6xl font-extrabold text-blue-300 mb-10 drop-shadow-lg">
-                🕵️‍♀️ The Data Afterlife: Your Digital Legacy
+                🕵️‍♀️ Your Digital Footprint & Privacy
             </h2>
             <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
-                What happens to your data when you're no longer actively online? Understanding this 'digital afterlife' is crucial for managing your legacy. Tap a term to reveal its meaning.
+                Every interaction online contributes to your digital footprint. Understanding how your data is used and protected is essential for digital safety. Click a term to learn more.
             </p>
 
             <div id="privacy-terms-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-8">
@@ -407,7 +421,7 @@
         </div>
     </section>
 
-    <!-- Section 5: "Emotional Cartography: Mapping Feelings in the Social Universe" -->
+    <!-- Section 5: Wellbeing Strategies -->
     <section id="wellbeing-strategies" class="min-h-screen bg-gradient-to-br from-emerald-900 to-teal-900 p-8 md:p-16 flex flex-col justify-center items-center text-center relative overflow-hidden reveal-on-scroll">
         <div class="absolute inset-0 z-0 opacity-20">
             <!-- Abstract bloom-like patterns -->
@@ -418,10 +432,10 @@
 
         <div class="relative z-10 max-w-5xl mx-auto">
             <h2 class="text-5xl md:text-6xl font-extrabold text-emerald-300 mb-10 drop-shadow-lg">
-                🌱 Emotional Cartography: Mapping Feelings in the Social Universe
+                🌱 Cultivating Digital Wellbeing
             </h2>
             <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
-                Navigate the emotional currents of the social universe. These strategies help you map and manage your feelings for a healthier digital journey. Hover over the cards to reveal practical tips.
+                Developing healthy habits is key to navigating social media positively. Hover over these cards for practical strategies to enhance your digital wellbeing.
             </p>
 
             <div id="wellbeing-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mt-8">
@@ -430,7 +444,7 @@
         </div>
     </section>
 
-    <!-- Conclusion Section: "Your Digital Legacy" -->
+    <!-- Conclusion Section -->
     <section id="conclusion" class="min-h-[50vh] bg-gradient-to-br from-gray-900 to-black p-8 md:p-16 flex flex-col justify-center items-center text-center relative overflow-hidden reveal-on-scroll">
         <div class="absolute inset-0 z-0 opacity-10">
             <!-- Abstract light source / nebula effect -->
@@ -438,11 +452,13 @@
         </div>
         <div class="relative z-10 max-w-3xl mx-auto">
             <h2 class="text-5xl md:text-6xl font-extrabold text-white mb-10 drop-shadow-lg">
-                ✨ Your Digital Legacy
+                ✨ Shaping Your Digital Future
             </h2>
-            <p id="conclusion-text" class="text-xl md:text-2xl text-gray-300 leading-relaxed mb-8"></p>
+            <p id="conclusion-text" class="text-xl md:text-2xl text-gray-300 leading-relaxed mb-8">
+                The digital landscape is constantly evolving, but your agency within it remains paramount. By understanding the intricate interplay between social media and personal wellbeing, and by consciously adopting healthy practices, individuals can harness the positive aspects of online connectivity while mitigating its potential harms. The future of our digital selves lies in informed and intentional engagement.
+            </p>
             <p class="text-lg md:text-xl text-gray-400">
-                Understand your data. Control your narrative. Shape your future.
+                Engage wisely. Thrive online.
             </p>
         </div>
     </section>
@@ -450,46 +466,111 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-500 py-6 text-center text-sm rounded-t-xl">
         <div class="container mx-auto px-4">
-            © 2025 Digital Death - The Social Universe Project
+            © 2025 Social Media & Wellbeing Project - Year 11 Standard English
             <br>
-            <span class="text-xs">Conceptual preview for academic assignment purposes.</span>
+            <span class="text-xs">Conceptual presentation for academic purposes.</span>
         </div>
     </footer>
+
+    <!-- Music Toggle Button -->
+    <button id="music-toggle-btn">
+        <span id="music-icon">🎶</span> Music On
+    </button>
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const loadingOverlay = document.getElementById('loading-overlay');
             loadingOverlay.style.display = 'flex'; // Show loading overlay
 
+            // Tone.js Music Setup
+            let synth;
+            let isMusicPlaying = false;
+            const musicToggleBtn = document.getElementById('music-toggle-btn');
+            const musicIcon = document.getElementById('music-icon');
+
+            async function setupMusic() {
+                try {
+                    await Tone.start();
+                    console.log("Audio context started. User interacted.");
+                    synth = new Tone.Synth({
+                        oscillator: {
+                            type: "sine" // Softer, more ambient tone
+                        },
+                        envelope: {
+                            attack: 0.5,
+                            decay: 0.2,
+                            sustain: 0.5,
+                            release: 1.0 // Longer release for a pad-like sound
+                        }
+                    }).toDestination();
+
+                    // Simple arpeggiated chord sequence (C major 7th)
+                    const notes = ["C4", "E4", "G4", "B4", "C5"];
+                    let noteIndex = 0;
+
+                    Tone.Transport.scheduleRepeat(time => {
+                        if (isMusicPlaying && synth) {
+                            // Play a random note from the chord to make it less repetitive
+                            const randomNote = notes[Math.floor(Math.random() * notes.length)];
+                            synth.triggerAttackRelease(randomNote, "2n", time); // Play for half a second
+                        }
+                    }, "1n"); // Trigger a note every whole note (slower)
+
+                    Tone.Transport.bpm.value = 60; // Very slow tempo for a calm, reflective mood
+                } catch (error) {
+                    console.error("Error setting up Tone.js:", error);
+                    musicToggleBtn.textContent = 'Music Error';
+                    musicToggleBtn.disabled = true;
+                }
+            }
+
+            musicToggleBtn.addEventListener('click', async () => {
+                if (!synth) { // Setup music only on first click
+                    await setupMusic();
+                }
+
+                if (isMusicPlaying) {
+                    Tone.Transport.stop();
+                    isMusicPlaying = false;
+                    musicIcon.textContent = '🔇';
+                    musicToggleBtn.innerHTML = '<span id="music-icon">🔇</span> Music Off';
+                } else {
+                    Tone.Transport.start();
+                    isMusicPlaying = true;
+                    musicIcon.textContent = '🎶';
+                    musicToggleBtn.innerHTML = '<span id="music-icon">🎶</span> Music On';
+                }
+            });
+
+
+            // AI Content Generation
             let chatHistory = [];
-            const prompt = `Generate highly engaging, concise, and relatable content for a single-page website.
-            Website Name: "Digital Death"
-            Main Title: "Your Digital Data"
-            Theme/Idea: "The Social Universe: Mapping Our Feelings" - Focus on how digital interactions and data reflect or influence our emotional states and connections within online spaces. Explore concepts like emotional contagion, digital empathy, collective sentiment, and the lasting impact of online emotional expressions. The content should be designed for quick comprehension on the main page, with more detailed information accessible through interactive elements.
+            const prompt = `Generate comprehensive, analytical, and engaging content for a single-page website about "Social Media's Impact on Wellbeing" for a Year 11 Standard English assignment. The content should provide a lot of information while being relatable and suitable for a high-achieving student (17-20 marks). The total content should be substantial, equating to roughly 800-900 words if read aloud/viewed within 6 minutes.
 
             The content should be structured as follows in a JSON format:
-            - **introduction**: A compelling, concise opening paragraph (approx. 30-50 words) for the hero section, introducing the concept of digital data and mapped feelings in the social universe. Make it highly relatable.
-            - **positive_impacts**: An array of 3-4 objects, each describing a positive impact related to mapping feelings or positive data patterns. Each object should have:
-                - 'title': (e.g., "Collective Empathy")
-                - 'summary': A very brief, engaging summary (approx. 15-25 words) for the main card.
-                - 'text': A more detailed paragraph (approx. 50-70 words) for the modal.
-                - 'fact': A concise, impactful statistic or example.
-            - **negative_impacts**: An array of 3 objects, each describing a negative impact related to digital risks or emotional vulnerabilities. Each object should have:
-                - 'title': (e.g., "Sentiment Manipulation")
-                - 'summary': A very brief, engaging summary (approx. 15-25 words) for the main slider display.
-                - 'text': A more detailed paragraph (approx. 60-80 words) for the full display.
-                - 'quote': A concise, impactful quote (simulating a user experience or expert opinion).
-            - **privacy_data**: An array of 2-3 objects explaining key privacy/data terms related to digital legacy or data afterlife. Each object should have:
-                - 'term': (e.g., "Algorithmic Echoes")
-                - 'summary': A very brief, engaging summary (approx. 15-25 words) for the main card.
-                - 'explanation': A more detailed explanation (approx. 40-60 words) for the modal.
-            - **wellbeing_strategies**: An array of 3-4 objects, each providing a practical strategy for emotional cartography or managing feelings in the social universe. Each object should have:
-                - 'tip_title': (e.g., "Emotional Filtering")
-                - 'tip_summary': A very brief, engaging summary (approx. 15-25 words) for the front of the flip card.
-                - 'tip_description': A more detailed explanation (approx. 40-60 words) for the back of the flip card.
-            - **conclusion**: An empowering, concise concluding paragraph (approx. 30-50 words) about understanding your digital legacy and shaping your future. Make it highly relatable.
+            - **introduction**: A compelling opening paragraph (approx. 80-120 words) for the hero section, introducing social media's pervasive role and its multifaceted impact on individual wellbeing. Use sophisticated vocabulary and analytical phrasing.
+            - **positive_impacts**: An array of 3-4 objects, each describing a positive impact. Each object should have:
+                - 'title': (e.g., "Community Building & Support Networks")
+                - 'summary': A concise, engaging summary (approx. 25-40 words) for the main card display.
+                - 'text': A detailed, analytical paragraph (approx. 100-150 words) for the modal, exploring the nuances of the impact.
+                - 'fact': A concise, impactful statistic or real-world example (e.g., "A study by XYZ found that 70% of users reported stronger social connections due to online groups.").
+            - **negative_impacts**: An array of 3 objects, each describing a negative impact. Each object should have:
+                - 'title': (e.g., "Comparison Culture & Self-Esteem Erosion")
+                - 'summary': A concise, impactful summary (approx. 25-40 words) for the main slider display.
+                - 'text': A detailed, analytical paragraph (approx. 120-180 words) for the full display, delving into the psychological mechanisms and societal implications.
+                - 'quote': A compelling, relatable quote (simulating a user experience or expert opinion, e.g., "It's like constantly scrolling through everyone's highlight reels, and you start feeling like your own life isn't enough.")
+            - **privacy_data**: An array of 2-3 objects explaining key privacy/data terms related to social media. Each object should have:
+                - 'term': (e.g., "Algorithmic Personalization")
+                - 'summary': A concise, clear summary (approx. 25-40 words) for the main card.
+                - 'explanation': A detailed explanation (approx. 80-120 words) for the modal, outlining its function and implications for users.
+            - **wellbeing_strategies**: An array of 3-4 objects, each providing a practical and well-articulated wellbeing strategy. Each object should have:
+                - 'tip_title': (e.g., "Digital Mindfulness & Conscious Engagement")
+                - 'tip_summary': A concise, actionable summary (approx. 25-40 words) for the front of the flip card.
+                - 'tip_description': A detailed explanation (approx. 80-120 words) for the back of the flip card, including practical steps and benefits.
+            - **conclusion**: An empowering and analytical concluding paragraph (approx. 80-120 words) that synthesizes the complexities, re-emphasizes user agency, and offers a balanced perspective on navigating social media for optimal wellbeing.
 
-            Ensure the language is approachable, analytical, creative, and imaginative. Focus on key ideas presented simply on the main page, with depth available through interaction. Use academic language appropriate for a Year 11 English context.`;
+            Ensure the language is sophisticated, analytical, and highly engaging. Focus on providing rich detail and nuanced arguments appropriate for a Year 11 English academic context.
+            `;
 
             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
 
@@ -553,18 +634,16 @@
                 }
             };
 
-            const apiKey = ""; // Canvas will provide this at runtime
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
-            // Initialize pageContent with default empty arrays and placeholder text
-            // This ensures that even if the API call completely fails, the script doesn't throw errors
+            // Initialize pageContent with defaults for robust error handling
             let pageContent = {
-                introduction: "Dive into the unseen forces shaping your online world. What emotions does your data truly reflect?",
+                introduction: "Social media is a pervasive force in our lives, shaping how we connect, perceive ourselves, and interact with the world. This presentation delves into its profound impact on individual wellbeing, examining both its empowering potential and its inherent challenges.",
                 positive_impacts: [],
                 negative_impacts: [],
                 privacy_data: [],
                 wellbeing_strategies: [],
-                conclusion: "Understand your data. Control your narrative. Shape your future."
+                conclusion: "The digital landscape is constantly evolving, but your agency within it remains paramount. By understanding the intricate interplay between social media and personal wellbeing, and by consciously adopting healthy practices, individuals can harness the positive aspects of online connectivity while mitigating its potential harms. The future of our digital selves lies in informed and intentional engagement."
             };
 
             try {
@@ -584,7 +663,6 @@
                     if (typeof jsonString === 'string' && jsonString.length > 0) {
                         console.log("Raw JSON string received:", jsonString); // Log the raw JSON string for debugging
                         try {
-                            // Attempt to parse the JSON string
                             const parsedContent = JSON.parse(jsonString);
                             
                             // Assign parsed content, using defaults if a property is missing in the parsed object
@@ -596,12 +674,12 @@
                                 wellbeing_strategies: parsedContent.wellbeing_strategies || [],
                                 conclusion: parsedContent.conclusion || pageContent.conclusion
                             });
-                            console.log("Generated Content:", pageContent); // Log for debugging
+                            console.log("Generated Content:", pageContent);
 
-                            // Populate Hero Section
+                            // --- Populate Content ---
                             document.getElementById('hero-intro-text').textContent = pageContent.introduction;
 
-                            // Positive Impacts Section
+                            // Section 2: Positive Impacts (Cards with Modals)
                             const positiveImpactsContainer = document.getElementById('positive-impacts-container');
                             const positiveImpactModal = document.getElementById('positiveImpactModal');
                             const positiveModalTitle = document.getElementById('positive-modal-title');
@@ -611,15 +689,15 @@
 
                             if (pageContent.positive_impacts.length > 0) {
                                 positiveImpactsContainer.innerHTML = pageContent.positive_impacts.map((impact, index) => `
-                                    <div class="bg-indigo-800 bg-opacity-70 p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer group relative overflow-hidden positive-impact-card" data-impact-index="${index}">
+                                    <div class="info-card p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer group relative overflow-hidden" data-impact-index="${index}">
                                         <div class="absolute inset-0 bg-gradient-to-br from-green-500 to-blue-500 opacity-20 group-hover:opacity-40 transition-opacity duration-300 rounded-xl"></div>
-                                        <h3 class="text-2xl font-bold text-green-300 mb-2 relative z-10">${impact.title || 'Untitled'}</h3>
+                                        <h3 class="text-2xl font-bold text-green-300 mb-2 relative z-10">${impact.title || 'Untitled Impact'}</h3>
                                         <p class="text-gray-200 text-base relative z-10">${impact.summary || 'Summary not available.'}</p>
-                                        <p class="text-green-200 text-sm italic mt-2 relative z-10">Tap for more.</p>
+                                        <p class="text-green-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
                                     </div>
                                 `).join('');
 
-                                document.querySelectorAll('.positive-impact-card').forEach(card => {
+                                document.querySelectorAll('#positive-impacts-container .info-card').forEach(card => {
                                     card.addEventListener('click', (event) => {
                                         const index = parseInt(event.currentTarget.dataset.impactIndex);
                                         if (pageContent.positive_impacts.length > index) {
@@ -638,7 +716,7 @@
 
                             closePositiveModalBtn.onclick = () => positiveImpactModal.style.display = 'none';
 
-                            // Negative Impacts Section
+                            // Negative Impacts Section (Slider)
                             const negativeImpactDisplay = document.getElementById('negative-impact-display');
                             const impactSlider = document.getElementById('impact-slider');
                             const sliderValueLabel = document.getElementById('slider-value-label');
@@ -675,28 +753,25 @@
                                         if (max > 0) {
                                             thumbPositionPx = (sliderRect.width - thumbWidth) * (value / max) + (thumbWidth / 2);
                                         } else {
-                                            // Handle case where max is 0 (only one item or no items)
-                                            thumbPositionPx = sliderRect.width / 2; // Center label
+                                            thumbPositionPx = sliderRect.width / 2; // Center label if only one item
                                         }
                                         sliderValueLabel.style.left = `${thumbPositionPx}px`;
                                         sliderValueLabel.style.transform = `translateX(-50%)`;
                                     });
 
-
-                                    // Update fragmented shapes (example: change color/opacity based on impact index)
+                                    // Update fragmented shapes (visual feedback for negative impact)
                                     negativeShapesContainer.innerHTML = ''; // Clear previous shapes
-                                    const colors = ['rgba(255, 0, 0, 0.3)', 'rgba(255, 165, 0, 0.3)', 'rgba(255, 69, 0, 0.3)']; // Red, Orange, Red-Orange
+                                    const colors = ['rgba(255, 0, 0, 0.3)', 'rgba(255, 100, 0, 0.3)', 'rgba(255, 150, 0, 0.3)']; // Shades of red/orange
                                     const positions = [
                                         { top: '10%', left: '15%', width: '80px', height: '80px', 'animation-delay': '0s' },
                                         { top: '30%', right: '20%', width: '120px', height: '120px', 'animation-delay': '2s' },
-                                        { bottom: '20%', left: '25%', width: '100px', height: '100px', 'animation-delay': '4s' },
-                                        { top: '60%', left: '5%', width: '70px', height: '70px', 'animation-delay': '6s' }
+                                        { bottom: '20%', left: '25%', width: '100px', height: '100px', 'animation-delay': '4s' }
                                     ];
-                                    for(let i = 0; i < Math.min(3, pageContent.negative_impacts.length); i++) { // Show up to 3 shapes
+                                    for(let i = 0; i < Math.min(3, pageContent.negative_impacts.length); i++) {
                                         const shapeDiv = document.createElement('div');
                                         shapeDiv.className = 'fragmented-shape';
                                         Object.assign(shapeDiv.style, positions[i]);
-                                        shapeDiv.style.backgroundColor = colors[index % colors.length]; // Cycle colors
+                                        shapeDiv.style.backgroundColor = colors[index % colors.length];
                                         negativeShapesContainer.appendChild(shapeDiv);
                                     }
 
@@ -715,7 +790,7 @@
                             }
 
 
-                            // Populate Privacy/Data Section
+                            // Populate Privacy/Data Section (Cards with Modals)
                             const privacyTermsContainer = document.getElementById('privacy-terms-container');
                             const privacyModal = document.getElementById('privacyModal');
                             const modalCloseBtn = privacyModal.querySelector('.modal-close-button');
@@ -724,14 +799,15 @@
 
                             if (pageContent.privacy_data.length > 0) {
                                 privacyTermsContainer.innerHTML = pageContent.privacy_data.map((item, index) => `
-                                    <div class="bg-blue-800 bg-opacity-70 p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer term-card" data-term-index="${index}">
-                                        <h3 class="text-2xl font-bold text-blue-300 mb-2">${item.term || 'Untitled Term'}</h3>
-                                        <p class="text-gray-200 text-base">${item.summary || 'Summary not available.'}</p>
-                                        <p class="text-blue-200 text-sm italic mt-2">Tap for more.</p>
+                                    <div class="info-card p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer group relative overflow-hidden" data-term-index="${index}">
+                                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-20 group-hover:opacity-40 transition-opacity duration-300 rounded-xl"></div>
+                                        <h3 class="text-2xl font-bold text-blue-300 mb-2 relative z-10">${item.term || 'Untitled Term'}</h3>
+                                        <p class="text-gray-200 text-base relative z-10">${item.summary || 'Summary not available.'}</p>
+                                        <p class="text-blue-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
                                     </div>
                                 `).join('');
 
-                                document.querySelectorAll('.term-card').forEach(card => {
+                                document.querySelectorAll('#privacy-terms-container .info-card').forEach(card => {
                                     card.addEventListener('click', (event) => {
                                         const index = parseInt(event.currentTarget.dataset.termIndex);
                                         if (pageContent.privacy_data.length > index) {
@@ -749,21 +825,22 @@
 
                             modalCloseBtn.onclick = () => privacyModal.style.display = 'none';
                             window.onclick = (event) => {
-                                if (event.target === privacyModal || event.target === positiveImpactModal) { // Close both modals
+                                if (event.target === privacyModal || event.target === positiveImpactModal) {
                                     privacyModal.style.display = 'none';
                                     positiveImpactModal.style.display = 'none';
                                 }
                             };
 
-                            // Populate Wellbeing Strategies Section
+                            // Populate Wellbeing Strategies Section (Flip Cards)
                             const wellbeingCardsContainer = document.getElementById('wellbeing-cards-container');
                             if (pageContent.wellbeing_strategies.length > 0) {
                                 wellbeingCardsContainer.innerHTML = pageContent.wellbeing_strategies.map((strategy, index) => `
                                     <div class="flip-card">
                                         <div class="flip-card-inner">
-                                            <div class="flip-card-front flex items-center justify-center p-4">
+                                            <div class="flip-card-front flex flex-col items-center justify-center p-4">
                                                 <h3 class="text-2xl font-bold">${strategy.tip_title || 'Untitled Tip'}</h3>
                                                 <p class="text-gray-200 text-base mt-2">${strategy.tip_summary || 'Summary not available.'}</p>
+                                                <p class="text-blue-200 text-sm italic mt-2">Hover for details.</p>
                                             </div>
                                             <div class="flip-card-back flex items-center justify-center p-4">
                                                 <p class="text-md leading-relaxed">${strategy.tip_description || 'No detailed description available.'}</p>
@@ -801,44 +878,44 @@
                         } catch (jsonParseError) {
                             console.error("Error parsing JSON response:", jsonParseError);
                             document.getElementById('hero-intro-text').textContent = "Error: Could not parse content from the AI. The response might be incomplete. Please try refreshing.";
-                            // Fallback to default content for other sections too, if parsing fails entirely
-                            document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
-                            document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content could not be loaded.</p>`;
-                            document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
-                            document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
-                            document.getElementById('conclusion-text').textContent = "Content could not be loaded. Please try again.";
+                            // Fallback to default content for all sections if parsing fails entirely
+                            document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
+                            document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content unavailable.</p>`;
+                            document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
+                            document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
+                            document.getElementById('conclusion-text').textContent = "Content unavailable.";
                         }
                     } else {
                         console.error("API response text content is empty or not a string:", jsonString);
                         document.getElementById('hero-intro-text').textContent = "Error: Received empty or invalid content from the AI.";
-                        // Fallback to default content for other sections too
-                        document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
-                        document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content could not be loaded.</p>`;
-                        document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
-                        document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
-                        document.getElementById('conclusion-text').textContent = "Content could not be loaded. Please try again.";
+                        // Fallback to default content for all sections
+                        document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
+                        document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content unavailable.</p>`;
+                        document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
+                        document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
+                        document.getElementById('conclusion-text').textContent = "Content unavailable.";
                     }
 
                 } else {
                     console.error("Failed to retrieve content from API response (missing candidates/parts):", result);
                     document.getElementById('hero-intro-text').textContent = "Failed to load content. Please try again.";
-                    // Fallback to default content for other sections too
-                    document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
-                    document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content could not be loaded.</p>`;
-                    document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
-                    document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
-                    document.getElementById('conclusion-text').textContent = "Content could not be loaded. Please try again.";
+                    // Fallback to default content for all sections
+                    document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
+                    document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content unavailable.</p>`;
+                    document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
+                    document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
+                    document.getElementById('conclusion-text').textContent = "Content unavailable.";
                 }
 
             } catch (error) {
                 console.error("Error fetching content:", error);
                 document.getElementById('hero-intro-text').textContent = "An error occurred while fetching content.";
-                // Fallback to default content for other sections too
-                document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
-                document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content could not be loaded.</p>`;
-                document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
-                document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content could not be loaded. Please try again.</p>`;
-                document.getElementById('conclusion-text').textContent = "Content could not be loaded. Please try again.";
+                // Fallback to default content for all sections
+                document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
+                document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content unavailable.</p>`;
+                document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
+                document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
+                document.getElementById('conclusion-text').textContent = "Content unavailable.";
             } finally {
                 loadingOverlay.style.display = 'none'; // Hide loading overlay
             }
