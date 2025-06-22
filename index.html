@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Media & Wellbeing: A Multimodal Exploration</title>
+    <title>Social Media & Wellbeing: A Relatable Exploration</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Tone.js CDN for background music -->
@@ -292,7 +292,7 @@
     <!-- Loading Overlay -->
     <div id="loading-overlay" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-90 z-[9999]">
         <div class="spinner"></div>
-        <p class="ml-4 text-xl text-purple-400">Loading digital insights...</p>
+        <p class="ml-4 text-xl text-purple-400">Loading your digital story...</p>
     </div>
 
     <!-- Header -->
@@ -319,7 +319,7 @@
                 YOUR ONLINE REFLECTION
             </h2>
             <p id="hero-intro-text" class="text-2xl md:text-3xl text-gray-200 mb-10 leading-relaxed">
-                Social media is a pervasive force in our lives, shaping how we connect, perceive ourselves, and interact with the world. This presentation delves into its profound impact on individual wellbeing, examining both its empowering potential and its inherent challenges.
+                Social media is a huge part of our daily lives, changing how we connect, see ourselves, and experience the world. This presentation looks into how it truly affects our feelings and well-being, exploring both its helpful sides and its real challenges.
             </p>
             <button id="start-exploring-btn" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-4 px-8 rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out animate-pulse-custom">
                 🔍 EXPLORE THE IMPACT
@@ -339,14 +339,29 @@
 
         <div class="relative z-10 max-w-5xl mx-auto">
             <h2 class="text-5xl md:text-6xl font-extrabold text-green-300 mb-10 drop-shadow-lg">
-                ✅ The Empowering Connection
+                ✅ Feeling Connected: The Good Side
             </h2>
             <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
-                Social media, when used mindfully, can be a powerful tool for connection, learning, and self-expression. Click on each aspect to discover its positive influence.
+                Social media, when used smartly, can really help us connect, learn new things, and express ourselves. Click on each idea to see its positive effects on how we feel.
             </p>
 
             <div id="positive-impacts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mt-8">
-                <!-- Content will be injected here by JavaScript -->
+                <!-- Placeholder cards for immediate display -->
+                <div class="info-card p-6 rounded-xl shadow-lg group relative overflow-hidden">
+                    <h3 class="text-2xl font-bold text-green-300 mb-2 relative z-10">Building Friendships & Support</h3>
+                    <p class="text-gray-200 text-base relative z-10">Find and strengthen connections with friends and family, and get support from others who understand you.</p>
+                    <p class="text-green-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
+                </div>
+                <div class="info-card p-6 rounded-xl shadow-lg group relative overflow-hidden">
+                    <h3 class="text-2xl font-bold text-green-300 mb-2 relative z-10">Learning & Sharing Ideas</h3>
+                    <p class="text-gray-200 text-base relative z-10">Discover new interests, explore different viewpoints, and share your own thoughts with a wider audience.</p>
+                    <p class="text-green-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
+                </div>
+                <div class="info-card p-6 rounded-xl shadow-lg group relative overflow-hidden">
+                    <h3 class="text-2xl font-bold text-green-300 mb-2 relative z-10">Expressing Yourself & Creativity</h3>
+                    <p class="text-gray-200 text-base relative z-10">Use social media to show your creativity, share your passions, and find your unique voice.</p>
+                    <p class="text-green-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
+                </div>
             </div>
         </div>
         <!-- Modal for Positive Impacts -->
@@ -368,25 +383,30 @@
 
         <div class="relative z-10 max-w-5xl mx-auto">
             <h2 class="text-5xl md:text-6xl font-extrabold text-red-300 mb-10 drop-shadow-lg">
-                ❌ Navigating the Digital Shadow
+                ❌ The Downside: How It Can Hurt Feelings
             </h2>
             <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
-                The constant digital gaze and curated realities can pose significant risks to mental wellbeing. Use the slider below to explore key challenges.
+                Seeing endless perfect lives online and dealing with constant digital pressure can really impact our feelings and self-worth. Use the slider below to learn about these tough parts.
             </p>
 
             <div class="bg-gray-800 bg-opacity-70 p-8 rounded-xl shadow-xl mb-10 relative">
                 <h3 class="text-3xl font-bold text-white mb-6">Explore Challenges:</h3>
-                <input type="range" id="impact-slider" min="0" max="0" value="0" step="1" class="w-full h-2 rounded-lg appearance-none cursor-pointer">
+                <input type="range" id="impact-slider" min="0" max="2" value="0" step="1" class="w-full h-2 rounded-lg appearance-none cursor-pointer">
                 <div id="slider-value-label" class="slider-value-indicator"></div>
                 <div class="flex justify-between text-lg text-gray-300 mt-4">
-                    <span id="label-0">Mental Health Concerns</span>
-                    <span id="label-1">Self-Esteem Issues</span>
-                    <span id="label-2">Exposure to Harm</span>
+                    <span id="label-0">Feeling Anxious or Down</span>
+                    <span id="label-1">Comparing Yourself</span>
+                    <span id="label-2">Online Bullying</span>
                 </div>
             </div>
 
             <div id="negative-impact-display" class="bg-gray-800 bg-opacity-70 p-8 rounded-xl shadow-xl max-w-3xl mx-auto min-h-[300px] flex flex-col justify-center">
-                <!-- Content will be dynamically updated by JavaScript -->
+                <!-- Placeholder content for immediate display -->
+                <h3 class="text-3xl font-bold text-red-300 mb-4">Feeling Anxious or Down</h3>
+                <p class="text-gray-200 text-lg mb-6">Spending too much time online, especially seeing curated highlight reels, can make us feel left out or not good enough. This can lead to feelings of sadness, anxiety, or even depression, as we constantly compare our real lives to others' seemingly perfect online ones.</p>
+                <p class="text-red-200 text-xl italic mt-auto">
+                    "Sometimes I scroll and just feel worse about myself. It's hard to remember it's not real life."
+                </p>
             </div>
         </div>
     </section>
@@ -400,14 +420,24 @@
         </div>
         <div class="relative z-10 max-w-5xl mx-auto">
             <h2 class="text-5xl md:text-6xl font-extrabold text-blue-300 mb-10 drop-shadow-lg">
-                🕵️‍♀️ Your Digital Footprint & Privacy
+                🕵️‍♀️ Your Online Footprint & Privacy
             </h2>
             <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
-                Every interaction online contributes to your digital footprint. Understanding how your data is used and protected is essential for digital safety. Click a term to learn more.
+                Every time you go online, you leave little digital traces. Knowing how your information is used and kept safe is super important for staying secure. Click a word to find out more.
             </p>
 
             <div id="privacy-terms-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-8">
-                <!-- Content will be injected here by JavaScript -->
+                <!-- Placeholder cards for immediate display -->
+                <div class="info-card p-6 rounded-xl shadow-lg group relative overflow-hidden">
+                    <h3 class="text-2xl font-bold text-blue-300 mb-2 relative z-10">Your Digital Shadow: What Stays Online?</h3>
+                    <p class="text-gray-200 text-base relative z-10">Everything you post, share, or even like online creates a lasting record, like a shadow that follows you.</p>
+                    <p class="text-blue-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
+                </div>
+                <div class="info-card p-6 rounded-xl shadow-lg group relative overflow-hidden">
+                    <h3 class="text-2xl font-bold text-blue-300 mb-2 relative z-10">Who Sees Your Stuff? Privacy Settings</h3>
+                    <p class="text-gray-200 text-base relative z-10">It's important to control who can see your personal information and posts using privacy settings.</p>
+                    <p class="text-blue-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
+                </div>
             </div>
         </div>
 
@@ -432,14 +462,50 @@
 
         <div class="relative z-10 max-w-5xl mx-auto">
             <h2 class="text-5xl md:text-6xl font-extrabold text-emerald-300 mb-10 drop-shadow-lg">
-                🌱 Cultivating Digital Wellbeing
+                🌱 Feeling Good Online: Smart Habits
             </h2>
             <p class="text-xl md:text-2xl text-gray-200 mb-12 leading-relaxed">
-                Developing healthy habits is key to navigating social media positively. Hover over these cards for practical strategies to enhance your digital wellbeing.
+                Learning good habits is key to using social media in a way that makes you feel good. Hover over these cards for simple tips to make your online life better.
             </p>
 
             <div id="wellbeing-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mt-8">
-                <!-- Content will be injected here by JavaScript -->
+                <!-- Placeholder cards for immediate display -->
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front flex flex-col items-center justify-center p-4">
+                            <h3 class="text-2xl font-bold">Taking Control: Setting Boundaries</h3>
+                            <p class="text-gray-200 text-base mt-2">Decide when and how you use social media to feel more in control.</p>
+                            <p class="text-blue-200 text-sm italic mt-2">Hover for details.</p>
+                        </div>
+                        <div class="flip-card-back flex items-center justify-center p-4">
+                            <p class="text-md leading-relaxed">Set daily time limits for apps, turn off notifications, and create tech-free zones. This helps reduce constant urges to check your phone, giving you more time for real-life activities and improving focus and calmness.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front flex flex-col items-center justify-center p-4">
+                            <h3 class="text-2xl font-bold">Being Mindful: Think Before You Post</h3>
+                            <p class="text-gray-200 text-base mt-2">Consider how your posts might make you and others feel before sharing.</p>
+                            <p class="text-blue-200 text-sm italic mt-2">Hover for details.</p>
+                        </div>
+                        <div class="flip-card-back flex items-center justify-center p-4">
+                            <p class="text-md leading-relaxed">Pause before posting to think about your message and its potential impact. Ask yourself: "Is this kind? Is this true? Is this necessary?" This reduces regret and promotes positive interactions, making online spaces feel safer and more supportive for everyone.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front flex flex-col items-center justify-center p-4">
+                            <h3 class="text-2xl font-bold">Focusing on Real Connections</h3>
+                            <p class="text-gray-200 text-base mt-2">Balance online interactions with face-to-face time with friends and family.</p>
+                            <p class="text-blue-200 text-sm italic mt-2">Hover for details.</p>
+                        </div>
+                        <div class="flip-card-back flex items-center justify-center p-4">
+                            <p class="text-md leading-relaxed">Prioritize real-life meetups, phone calls, and shared activities with loved ones. While online connections are great, strong in-person bonds build deeper trust and emotional support, which are crucial for our overall happiness and sense of belonging.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -452,13 +518,13 @@
         </div>
         <div class="relative z-10 max-w-3xl mx-auto">
             <h2 class="text-5xl md:text-6xl font-extrabold text-white mb-10 drop-shadow-lg">
-                ✨ Shaping Your Digital Future
+                ✨ Making Your Online Story Positive
             </h2>
             <p id="conclusion-text" class="text-xl md:text-2xl text-gray-300 leading-relaxed mb-8">
-                The digital landscape is constantly evolving, but your agency within it remains paramount. By understanding the intricate interplay between social media and personal wellbeing, and by consciously adopting healthy practices, individuals can harness the positive aspects of online connectivity while mitigating its potential harms. The future of our digital selves lies in informed and intentional engagement.
+                The online world keeps changing, but you're always in charge of your experience. By understanding how social media affects your feelings, and by choosing healthy ways to use it, you can enjoy its good parts and avoid the bad. Your online future is all about using it wisely and happily.
             </p>
             <p class="text-lg md:text-xl text-gray-400">
-                Engage wisely. Thrive online.
+                Use it smartly. Feel good online.
             </p>
         </div>
     </section>
@@ -480,8 +546,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const loadingOverlay = document.getElementById('loading-overlay');
-            loadingOverlay.style.display = 'flex'; // Show loading overlay
-
             // Tone.js Music Setup
             let synth;
             let isMusicPlaying = false;
@@ -545,32 +609,31 @@
 
             // AI Content Generation
             let chatHistory = [];
-            const prompt = `Generate comprehensive, analytical, and engaging content for a single-page website about "Social Media's Impact on Wellbeing" for a Year 11 Standard English assignment. The content should provide a lot of information while being relatable and suitable for a high-achieving student (17-20 marks). The total content should be substantial, equating to roughly 800-900 words if read aloud/viewed within 6 minutes.
+            const prompt = `Generate comprehensive, clear, and relatable content for a single-page website about "Social Media's Impact on Wellbeing" for a Year 11 Standard English assignment. The content should be highly informative and directly address feelings and connections, suitable for a high-achieving student (17-20 marks). The total content should be substantial, roughly 800-900 words if all interactive elements are explored. Avoid advanced academic jargon where simpler, more direct terms convey the meaning equally well, focusing on impact on personal feelings and connections. DO NOT INCLUDE A REFLECTION.
 
             The content should be structured as follows in a JSON format:
-            - **introduction**: A compelling opening paragraph (approx. 80-120 words) for the hero section, introducing social media's pervasive role and its multifaceted impact on individual wellbeing. Use sophisticated vocabulary and analytical phrasing.
-            - **positive_impacts**: An array of 3-4 objects, each describing a positive impact. Each object should have:
-                - 'title': (e.g., "Community Building & Support Networks")
-                - 'summary': A concise, engaging summary (approx. 25-40 words) for the main card display.
-                - 'text': A detailed, analytical paragraph (approx. 100-150 words) for the modal, exploring the nuances of the impact.
-                - 'fact': A concise, impactful statistic or real-world example (e.g., "A study by XYZ found that 70% of users reported stronger social connections due to online groups.").
-            - **negative_impacts**: An array of 3 objects, each describing a negative impact. Each object should have:
-                - 'title': (e.g., "Comparison Culture & Self-Esteem Erosion")
-                - 'summary': A concise, impactful summary (approx. 25-40 words) for the main slider display.
-                - 'text': A detailed, analytical paragraph (approx. 120-180 words) for the full display, delving into the psychological mechanisms and societal implications.
-                - 'quote': A compelling, relatable quote (simulating a user experience or expert opinion, e.g., "It's like constantly scrolling through everyone's highlight reels, and you start feeling like your own life isn't enough.")
-            - **privacy_data**: An array of 2-3 objects explaining key privacy/data terms related to social media. Each object should have:
-                - 'term': (e.g., "Algorithmic Personalization")
-                - 'summary': A concise, clear summary (approx. 25-40 words) for the main card.
-                - 'explanation': A detailed explanation (approx. 80-120 words) for the modal, outlining its function and implications for users.
-            - **wellbeing_strategies**: An array of 3-4 objects, each providing a practical and well-articulated wellbeing strategy. Each object should have:
-                - 'tip_title': (e.g., "Digital Mindfulness & Conscious Engagement")
-                - 'tip_summary': A concise, actionable summary (approx. 25-40 words) for the front of the flip card.
-                - 'tip_description': A detailed explanation (approx. 80-120 words) for the back of the flip card, including practical steps and benefits.
-            - **conclusion**: An empowering and analytical concluding paragraph (approx. 80-120 words) that synthesizes the complexities, re-emphasizes user agency, and offers a balanced perspective on navigating social media for optimal wellbeing.
+            - **introduction**: A compelling opening paragraph (approx. 70-90 words) for the hero section, introducing social media's big role in our lives and how it deeply affects our personal feelings and connections. Use clear, engaging language.
+            - **positive_impacts**: An array of 3-4 objects, each describing a good way social media helps us feel. Each object should have:
+                - 'title': (e.g., "Finding Your Community & Support") - simple, direct title
+                - 'summary': A very quick, inviting snapshot (approx. 15-25 words) for the main card, focusing on feelings of belonging or connection.
+                - 'text': A detailed, thorough paragraph (approx. 80-120 words) for the modal, explaining how this impact helps people emotionally and socially, connecting to real-life feelings and building connections.
+                - 'fact': A simple, impactful real-life example or relatable statistic, like 'Many young people find comfort and friendship in online communities, especially when they feel alone, reducing feelings of isolation by up to 40%.'
+            - **negative_impacts**: An array of 3 objects, each describing a tough way social media can hurt our feelings. Each object should have:
+                - 'title': (e.g., "The Weight of Comparison & Self-Doubt") - direct, emotional, relatable title
+                - 'summary': A very quick, honest snapshot (approx. 15-25 words) for the main slider display, highlighting emotional struggles.
+                - 'text': A detailed, in-depth paragraph (approx. 90-140 words) for the full display, explaining the emotional and social reasons behind these struggles, like anxiety from constant scrolling or feeling less worthy.
+                - 'quote': A powerful, realistic quote reflecting emotional impact, like 'It feels like everyone else is living their best life, and I'm just watching from the sidelines. It makes me feel small and anxious.'
+            - **privacy_data**: An array of 2-3 objects explaining important terms about our online information. Each object should have:
+                - 'term': (e.g., "Your Digital Shadow: What Stays Online?") - simpler term
+                - 'summary': A very quick, easy-to-understand snapshot (approx. 15-25 words) for the main card, explaining what the term means for our personal data.
+                - 'explanation': A detailed explanation (approx. 70-100 words) for the modal, outlining its real-world impact on our privacy and sense of security, and the feelings associated with it.
+            - **wellbeing_strategies**: An array of 3-4 objects, each giving a practical tip for feeling better online. Each object should have:
+                - 'tip_title': (e.g., "Taking Control: Setting Boundaries") - actionable, empowering, clear title
+                - 'tip_summary': A very quick, encouraging snapshot (approx. 15-25 words) for the front of the flip card, focusing on practical actions.
+                - 'tip_description': A detailed explanation (approx. 70-100 words) for the back of the flip card, giving clear steps and explaining how these help our feelings and connections.
+            - **conclusion**: An uplifting and clear concluding paragraph (approx. 70-90 words) that brings everything together, focusing on how we can take control of our online experience to feel happier and more connected.
 
-            Ensure the language is sophisticated, analytical, and highly engaging. Focus on providing rich detail and nuanced arguments appropriate for a Year 11 English academic context.
-            `;
+            Ensure the language is approachable, empathetic, and impactful on feelings and connections. It should provide rich detail and nuanced points, suitable for a Year 11 English academic context, but with simplified vocabulary.`;
 
             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
 
@@ -636,21 +699,124 @@
 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
-            // Initialize pageContent with defaults for robust error handling
+            // Initialize pageContent with defaults for robust error handling AND immediate display
             let pageContent = {
-                introduction: "Social media is a pervasive force in our lives, shaping how we connect, perceive ourselves, and interact with the world. This presentation delves into its profound impact on individual wellbeing, examining both its empowering potential and its inherent challenges.",
-                positive_impacts: [],
-                negative_impacts: [],
-                privacy_data: [],
-                wellbeing_strategies: [],
-                conclusion: "The digital landscape is constantly evolving, but your agency within it remains paramount. By understanding the intricate interplay between social media and personal wellbeing, and by consciously adopting healthy practices, individuals can harness the positive aspects of online connectivity while mitigating its potential harms. The future of our digital selves lies in informed and intentional engagement."
+                introduction: "Social media is a huge part of our daily lives, changing how we connect, see ourselves, and experience the world. This presentation looks into how it truly affects our feelings and well-being, exploring both its helpful sides and its real challenges.",
+                positive_impacts: [
+                    { title: "Building Friendships & Support", summary: "Find and strengthen connections with friends and family, and get support from others who understand you.", text: "Placeholder text for Building Friendships & Support.", fact: "Placeholder fact." },
+                    { title: "Learning & Sharing Ideas", summary: "Discover new interests, explore different viewpoints, and share your own thoughts with a wider audience.", text: "Placeholder text for Learning & Sharing Ideas.", fact: "Placeholder fact." },
+                    { title: "Expressing Yourself & Creativity", summary: "Use social media to show your creativity, share your passions, and find your unique voice.", text: "Placeholder text for Expressing Yourself & Creativity.", fact: "Placeholder fact." }
+                ],
+                negative_impacts: [
+                    { title: "Feeling Anxious or Down", summary: "Constant exposure to perfect online lives can lead to feelings of sadness, worry, or not being good enough.", text: "Spending too much time online, especially seeing curated highlight reels, can make us feel left out or not good enough. This can lead to feelings of sadness, anxiety, or even depression, as we constantly compare our real lives to others' seemingly perfect online ones.", quote: "Sometimes I scroll and just feel worse about myself. It's hard to remember it's not real life." },
+                    { title: "Comparing Yourself", summary: "The endless scroll of perfect lives can make you feel inadequate and constantly compare your life to others.", text: "Placeholder text for Comparing Yourself.", quote: "Placeholder quote." },
+                    { title: "Online Bullying", summary: "Sadly, social media can expose individuals to hurtful comments or cyberbullying, impacting their emotional safety.", text: "Placeholder text for Online Bullying.", quote: "Placeholder quote." }
+                ],
+                privacy_data: [
+                    { term: "Your Digital Shadow: What Stays Online?", summary: "Everything you post, share, or even like online creates a lasting record, like a shadow that follows you.", explanation: "Placeholder explanation." },
+                    { term: "Who Sees Your Stuff? Privacy Settings", summary: "It's important to control who can see your personal information and posts using privacy settings.", explanation: "Placeholder explanation." }
+                ],
+                wellbeing_strategies: [
+                    { tip_title: "Taking Control: Setting Boundaries", tip_summary: "Decide when and how you use social media to feel more in control.", tip_description: "Set daily time limits for apps, turn off notifications, and create tech-free zones. This helps reduce constant urges to check your phone, giving you more time for real-life activities and improving focus and calmness." },
+                    { tip_title: "Being Mindful: Think Before You Post", tip_summary: "Consider how your posts might make you and others feel before sharing.", tip_description: "Pause before posting to think about your message and its potential impact. Ask yourself: 'Is this kind? Is this true? Is this necessary?' This reduces regret and promotes positive interactions, making online spaces feel safer and more supportive for everyone." },
+                    { tip_title: "Focusing on Real Connections", tip_summary: "Balance online interactions with face-to-face time with friends and family.", tip_description: "Prioritize real-life meetups, phone calls, and shared activities with loved ones. While online connections are great, strong in-person bonds build deeper trust and emotional support, which are crucial for our overall happiness and sense of belonging." }
+                ],
+                conclusion: "The online world keeps changing, but you're always in charge of your experience. By understanding how social media affects your feelings, and by choosing healthy ways to use it, you can enjoy its good parts and avoid the bad. Your online future is all about using it wisely and happily."
             };
+
+            // Immediately populate the DOM with placeholder content
+            document.getElementById('hero-intro-text').textContent = pageContent.introduction;
+
+            const positiveImpactsContainer = document.getElementById('positive-impacts-container');
+            positiveImpactsContainer.innerHTML = pageContent.positive_impacts.map((impact, index) => `
+                <div class="info-card p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer group relative overflow-hidden" data-impact-index="${index}">
+                    <div class="absolute inset-0 bg-gradient-to-br from-green-500 to-blue-500 opacity-20 group-hover:opacity-40 transition-opacity duration-300 rounded-xl"></div>
+                    <h3 class="text-2xl font-bold text-green-300 mb-2 relative z-10">${impact.title || 'Untitled Impact'}</h3>
+                    <p class="text-gray-200 text-base relative z-10">${impact.summary || 'Summary not available.'}</p>
+                    <p class="text-green-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
+                </div>
+            `).join('');
+
+            const negativeImpactDisplay = document.getElementById('negative-impact-display');
+            // Ensure negative_impacts has at least one element for initial display
+            if (pageContent.negative_impacts.length > 0) {
+                const initialImpact = pageContent.negative_impacts[0];
+                negativeImpactDisplay.innerHTML = `
+                    <h3 class="text-3xl font-bold text-red-300 mb-4">${initialImpact.title || 'Untitled'}</h3>
+                    <p class="text-gray-200 text-lg mb-6">${initialImpact.text || 'No detailed text available.'}</p>
+                    <p class="text-red-200 text-xl italic mt-auto">
+                        "${initialImpact.quote || 'No quote available.'}"
+                    </p>
+                `;
+            } else {
+                negativeImpactDisplay.innerHTML = `<p class="text-red-400 text-lg">Loading challenges...</p>`;
+            }
+            document.getElementById('impact-slider').max = pageContent.negative_impacts.length > 0 ? pageContent.negative_impacts.length - 1 : 0;
+
+
+            const privacyTermsContainer = document.getElementById('privacy-terms-container');
+            privacyTermsContainer.innerHTML = pageContent.privacy_data.map((item, index) => `
+                <div class="info-card p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer group relative overflow-hidden" data-term-index="${index}">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-20 group-hover:opacity-40 transition-opacity duration-300 rounded-xl"></div>
+                    <h3 class="text-2xl font-bold text-blue-300 mb-2 relative z-10">${item.term || 'Untitled Term'}</h3>
+                    <p class="text-gray-200 text-base relative z-10">${item.summary || 'Summary not available.'}</p>
+                    <p class="text-blue-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
+                </div>
+            `).join('');
+
+            const wellbeingCardsContainer = document.getElementById('wellbeing-cards-container');
+            wellbeingCardsContainer.innerHTML = pageContent.wellbeing_strategies.map((strategy, index) => `
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front flex flex-col items-center justify-center p-4">
+                            <h3 class="text-2xl font-bold">${strategy.tip_title || 'Untitled Tip'}</h3>
+                            <p class="text-gray-200 text-base mt-2">${strategy.tip_summary || 'Summary not available.'}</p>
+                            <p class="text-blue-200 text-sm italic mt-2">Hover for details.</p>
+                        </div>
+                        <div class="flip-card-back flex items-center justify-center p-4">
+                            <p class="text-md leading-relaxed">${strategy.tip_description || 'No detailed description available.'}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('conclusion-text').textContent = pageContent.conclusion;
+
+            // --- Begin Fetching AI Content ---
+            loadingOverlay.style.display = 'flex'; // Ensure loading overlay is visible during API call
+
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            const prompt = `Generate comprehensive, clear, and relatable content for a single-page website about "Social Media's Impact on Wellbeing" for a Year 11 Standard English assignment. The content should be highly informative and directly address feelings and connections, suitable for a high-achieving student (17-20 marks). The total content should be substantial, roughly 800-900 words if all interactive elements are explored. Avoid advanced academic jargon where simpler, more direct terms convey the meaning equally well, focusing on impact on personal feelings and connections. DO NOT INCLUDE A REFLECTION.
+
+            The content should be structured as follows in a JSON format:
+            - **introduction**: A compelling opening paragraph (approx. 70-90 words) for the hero section, introducing social media's big role in our lives and how it deeply affects our personal feelings and connections. Use clear, engaging language.
+            - **positive_impacts**: An array of 3-4 objects, each describing a good way social media helps us feel. Each object should have:
+                - 'title': (e.g., "Finding Your Community & Support") - simple, direct title
+                - 'summary': A very quick, inviting snapshot (approx. 15-25 words) for the main card, focusing on feelings of belonging or connection.
+                - 'text': A detailed, thorough paragraph (approx. 80-120 words) for the modal, explaining how this impact helps people emotionally and socially, connecting to real-life feelings and building connections.
+                - 'fact': A simple, impactful real-life example or relatable statistic, like 'Many young people find comfort and friendship in online communities, especially when they feel alone, reducing feelings of isolation by up to 40%.'
+            - **negative_impacts**: An array of 3 objects, each describing a tough way social media can hurt our feelings. Each object should have:
+                - 'title': (e.g., "The Weight of Comparison & Self-Doubt") - direct, emotional, relatable title
+                - 'summary': A very quick, honest snapshot (approx. 15-25 words) for the main slider display, highlighting emotional struggles.
+                - 'text': A detailed, in-depth paragraph (approx. 90-140 words) for the full display, explaining the emotional and social reasons behind these struggles, like anxiety from constant scrolling or feeling less worthy.
+                - 'quote': A powerful, realistic quote reflecting emotional impact, like 'It feels like everyone else is living their best life, and I'm just watching from the sidelines. It makes me feel small and anxious.'
+            - **privacy_data**: An array of 2-3 objects explaining important terms about our online information. Each object should have:
+                - 'term': (e.g., "Your Digital Shadow: What Stays Online?") - simpler term
+                - 'summary': A very quick, easy-to-understand snapshot (approx. 15-25 words) for the main card, explaining what the term means for our personal data.
+                - 'explanation': A detailed explanation (approx. 70-100 words) for the modal, outlining its real-world impact on our privacy and sense of security, and the feelings associated with it.
+            - **wellbeing_strategies**: An array of 3-4 objects, each giving a practical tip for feeling better online. Each object should have:
+                - 'tip_title': (e.g., "Taking Control: Setting Boundaries") - actionable, empowering, clear title
+                - 'tip_summary': A very quick, encouraging snapshot (approx. 15-25 words) for the front of the flip card, focusing on practical actions.
+                - 'tip_description': A detailed explanation (approx. 70-100 words) for the back of the flip card, giving clear steps and explaining how these help our feelings and connections.
+            - **conclusion**: An uplifting and clear concluding paragraph (approx. 70-90 words) that brings everything together, focusing on how we can take control of our online experience to feel happier and more connected.
+
+            Ensure the language is approachable, empathetic, and impactful on feelings and connections. It should provide rich detail and nuanced points, suitable for a Year 11 English academic context, but with simplified vocabulary.`;
 
             try {
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }] })
                 });
 
                 const result = await response.json();
@@ -676,249 +842,187 @@
                             });
                             console.log("Generated Content:", pageContent);
 
-                            // --- Populate Content ---
+                            // --- Update DOM with AI Content ---
                             document.getElementById('hero-intro-text').textContent = pageContent.introduction;
 
                             // Section 2: Positive Impacts (Cards with Modals)
-                            const positiveImpactsContainer = document.getElementById('positive-impacts-container');
-                            const positiveImpactModal = document.getElementById('positiveImpactModal');
-                            const positiveModalTitle = document.getElementById('positive-modal-title');
-                            const positiveModalText = document.getElementById('positive-modal-text');
-                            const positiveModalFact = document.getElementById('positive-modal-fact');
-                            const closePositiveModalBtn = positiveImpactModal.querySelector('.modal-close-button');
-
-                            if (pageContent.positive_impacts.length > 0) {
-                                positiveImpactsContainer.innerHTML = pageContent.positive_impacts.map((impact, index) => `
-                                    <div class="info-card p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer group relative overflow-hidden" data-impact-index="${index}">
-                                        <div class="absolute inset-0 bg-gradient-to-br from-green-500 to-blue-500 opacity-20 group-hover:opacity-40 transition-opacity duration-300 rounded-xl"></div>
-                                        <h3 class="text-2xl font-bold text-green-300 mb-2 relative z-10">${impact.title || 'Untitled Impact'}</h3>
-                                        <p class="text-gray-200 text-base relative z-10">${impact.summary || 'Summary not available.'}</p>
-                                        <p class="text-green-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
-                                    </div>
-                                `).join('');
-
-                                document.querySelectorAll('#positive-impacts-container .info-card').forEach(card => {
-                                    card.addEventListener('click', (event) => {
-                                        const index = parseInt(event.currentTarget.dataset.impactIndex);
-                                        if (pageContent.positive_impacts.length > index) {
-                                            const impactData = pageContent.positive_impacts[index];
-                                            positiveModalTitle.textContent = impactData.title || 'Details';
-                                            positiveModalText.textContent = impactData.text || 'No detailed text available.';
-                                            positiveModalFact.textContent = `Fact: ${impactData.fact || 'No fact available.'}`;
-                                            positiveImpactModal.style.display = 'flex';
-                                        }
-                                    });
+                            positiveImpactsContainer.innerHTML = pageContent.positive_impacts.map((impact, index) => `
+                                <div class="info-card p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer group relative overflow-hidden" data-impact-index="${index}">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-green-500 to-blue-500 opacity-20 group-hover:opacity-40 transition-opacity duration-300 rounded-xl"></div>
+                                    <h3 class="text-2xl font-bold text-green-300 mb-2 relative z-10">${impact.title || 'Untitled Impact'}</h3>
+                                    <p class="text-gray-200 text-base relative z-10">${impact.summary || 'Summary not available.'}</p>
+                                    <p class="text-green-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
+                                </div>
+                            `).join('');
+                            document.querySelectorAll('#positive-impacts-container .info-card').forEach(card => {
+                                card.addEventListener('click', (event) => {
+                                    const index = parseInt(event.currentTarget.dataset.impactIndex);
+                                    if (pageContent.positive_impacts.length > index) {
+                                        const impactData = pageContent.positive_impacts[index];
+                                        positiveModalTitle.textContent = impactData.title || 'Details';
+                                        positiveModalText.textContent = impactData.text || 'No detailed text available.';
+                                        positiveModalFact.textContent = `Fact: ${impactData.fact || 'No fact available.'}`;
+                                        positiveImpactModal.style.display = 'flex';
+                                    }
                                 });
-                            } else {
-                                console.warn("Positive impacts data is empty or malformed.");
-                                positiveImpactsContainer.innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Positive impacts content could not be loaded. Please try again.</p>`;
-                            }
-
-                            closePositiveModalBtn.onclick = () => positiveImpactModal.style.display = 'none';
+                            });
 
                             // Negative Impacts Section (Slider)
-                            const negativeImpactDisplay = document.getElementById('negative-impact-display');
-                            const impactSlider = document.getElementById('impact-slider');
-                            const sliderValueLabel = document.getElementById('slider-value-label');
-                            const negativeShapesContainer = document.getElementById('negative-shapes-container');
-
-                            // Dynamically set max for slider based on actual data
                             if (pageContent.negative_impacts.length > 0) {
                                 impactSlider.max = pageContent.negative_impacts.length - 1;
-                                impactSlider.disabled = false; // Enable slider
+                                impactSlider.disabled = false;
+                                updateNegativeImpactDisplay(parseInt(impactSlider.value)); // Update with AI content
                             } else {
-                                impactSlider.max = 0; // No impacts, so slider won't move
-                                impactSlider.disabled = true; // Disable slider if no data
-                            }
-
-                            function updateNegativeImpactDisplay(index) {
-                                if (pageContent.negative_impacts.length > index) {
-                                    const impact = pageContent.negative_impacts[index];
-                                    negativeImpactDisplay.innerHTML = `
-                                        <h3 class="text-3xl font-bold text-red-300 mb-4">${impact.title || 'Untitled'}</h3>
-                                        <p class="text-gray-200 text-lg mb-6">${impact.text || 'No detailed text available.'}</p>
-                                        <p class="text-red-200 text-xl italic mt-auto">
-                                            "${impact.quote || 'No quote available.'}"
-                                        </p>
-                                    `;
-                                    // Update slider value label
-                                    sliderValueLabel.textContent = impact.title || '';
-                                    // Dynamically position slider value label
-                                    requestAnimationFrame(() => {
-                                        const sliderRect = impactSlider.getBoundingClientRect();
-                                        const thumbWidth = 20; // Approximate thumb width
-                                        const value = parseInt(impactSlider.value);
-                                        const max = parseInt(impactSlider.max);
-                                        let thumbPositionPx = 0;
-                                        if (max > 0) {
-                                            thumbPositionPx = (sliderRect.width - thumbWidth) * (value / max) + (thumbWidth / 2);
-                                        } else {
-                                            thumbPositionPx = sliderRect.width / 2; // Center label if only one item
-                                        }
-                                        sliderValueLabel.style.left = `${thumbPositionPx}px`;
-                                        sliderValueLabel.style.transform = `translateX(-50%)`;
-                                    });
-
-                                    // Update fragmented shapes (visual feedback for negative impact)
-                                    negativeShapesContainer.innerHTML = ''; // Clear previous shapes
-                                    const colors = ['rgba(255, 0, 0, 0.3)', 'rgba(255, 100, 0, 0.3)', 'rgba(255, 150, 0, 0.3)']; // Shades of red/orange
-                                    const positions = [
-                                        { top: '10%', left: '15%', width: '80px', height: '80px', 'animation-delay': '0s' },
-                                        { top: '30%', right: '20%', width: '120px', height: '120px', 'animation-delay': '2s' },
-                                        { bottom: '20%', left: '25%', width: '100px', height: '100px', 'animation-delay': '4s' }
-                                    ];
-                                    for(let i = 0; i < Math.min(3, pageContent.negative_impacts.length); i++) {
-                                        const shapeDiv = document.createElement('div');
-                                        shapeDiv.className = 'fragmented-shape';
-                                        Object.assign(shapeDiv.style, positions[i]);
-                                        shapeDiv.style.backgroundColor = colors[index % colors.length];
-                                        negativeShapesContainer.appendChild(shapeDiv);
-                                    }
-
-                                } else {
-                                    console.warn(`Attempted to access negative impact at index ${index}, but data is not available.`);
-                                    negativeImpactDisplay.innerHTML = `<p class="text-red-400 text-lg">Content not available for this selection.</p>`;
-                                }
-                            }
-                            
-                            // Initialize slider and content
-                            impactSlider.oninput = (event) => updateNegativeImpactDisplay(parseInt(event.target.value));
-                            if (pageContent.negative_impacts.length > 0) {
-                                updateNegativeImpactDisplay(0);
-                            } else {
+                                impactSlider.max = 0;
+                                impactSlider.disabled = true;
                                 negativeImpactDisplay.innerHTML = `<p class="text-red-400 text-lg">Negative impacts content could not be loaded.</p>`;
                             }
 
-
-                            // Populate Privacy/Data Section (Cards with Modals)
-                            const privacyTermsContainer = document.getElementById('privacy-terms-container');
-                            const privacyModal = document.getElementById('privacyModal');
-                            const modalCloseBtn = privacyModal.querySelector('.modal-close-button');
-                            const modalTermTitle = document.getElementById('modal-term-title');
-                            const modalTermExplanation = document.getElementById('modal-term-explanation');
-
-                            if (pageContent.privacy_data.length > 0) {
-                                privacyTermsContainer.innerHTML = pageContent.privacy_data.map((item, index) => `
-                                    <div class="info-card p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer group relative overflow-hidden" data-term-index="${index}">
-                                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-20 group-hover:opacity-40 transition-opacity duration-300 rounded-xl"></div>
-                                        <h3 class="text-2xl font-bold text-blue-300 mb-2 relative z-10">${item.term || 'Untitled Term'}</h3>
-                                        <p class="text-gray-200 text-base relative z-10">${item.summary || 'Summary not available.'}</p>
-                                        <p class="text-blue-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
-                                    </div>
-                                `).join('');
-
-                                document.querySelectorAll('#privacy-terms-container .info-card').forEach(card => {
-                                    card.addEventListener('click', (event) => {
-                                        const index = parseInt(event.currentTarget.dataset.termIndex);
-                                        if (pageContent.privacy_data.length > index) {
-                                            const termData = pageContent.privacy_data[index];
-                                            modalTermTitle.textContent = termData.term || 'Details';
-                                            modalTermExplanation.textContent = termData.explanation || 'No detailed explanation available.';
-                                            privacyModal.style.display = 'flex';
-                                        }
-                                    });
-                                });
-                            } else {
-                                console.error("Privacy data is missing or not an array, or empty.");
-                                privacyTermsContainer.innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Privacy data content could not be loaded. Please try again.</p>`;
-                            }
-
-                            modalCloseBtn.onclick = () => privacyModal.style.display = 'none';
-                            window.onclick = (event) => {
-                                if (event.target === privacyModal || event.target === positiveImpactModal) {
-                                    privacyModal.style.display = 'none';
-                                    positiveImpactModal.style.display = 'none';
-                                }
-                            };
-
-                            // Populate Wellbeing Strategies Section (Flip Cards)
-                            const wellbeingCardsContainer = document.getElementById('wellbeing-cards-container');
-                            if (pageContent.wellbeing_strategies.length > 0) {
-                                wellbeingCardsContainer.innerHTML = pageContent.wellbeing_strategies.map((strategy, index) => `
-                                    <div class="flip-card">
-                                        <div class="flip-card-inner">
-                                            <div class="flip-card-front flex flex-col items-center justify-center p-4">
-                                                <h3 class="text-2xl font-bold">${strategy.tip_title || 'Untitled Tip'}</h3>
-                                                <p class="text-gray-200 text-base mt-2">${strategy.tip_summary || 'Summary not available.'}</p>
-                                                <p class="text-blue-200 text-sm italic mt-2">Hover for details.</p>
-                                            </div>
-                                            <div class="flip-card-back flex items-center justify-center p-4">
-                                                <p class="text-md leading-relaxed">${strategy.tip_description || 'No detailed description available.'}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `).join('');
-                            } else {
-                                console.error("Wellbeing strategies data is missing or not an array, or empty.");
-                                wellbeingCardsContainer.innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Wellbeing strategies content could not be loaded. Please try again.</p>`;
-                            }
-
-                            // Populate Conclusion Section
-                            document.getElementById('conclusion-text').textContent = pageContent.conclusion;
-
-                            // Apply scroll-triggered animations
-                            const sections = document.querySelectorAll('.reveal-on-scroll');
-                            const observer = new IntersectionObserver((entries) => {
-                                entries.forEach(entry => {
-                                    if (entry.isIntersecting) {
-                                        entry.target.classList.add('active');
-                                    } else {
-                                        // Optional: remove 'active' class when out of view
-                                        // entry.target.classList.remove('active');
+                            // Privacy/Data Section (Cards with Modals)
+                            privacyTermsContainer.innerHTML = pageContent.privacy_data.map((item, index) => `
+                                <div class="info-card p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer group relative overflow-hidden" data-term-index="${index}">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-20 group-hover:opacity-40 transition-opacity duration-300 rounded-xl"></div>
+                                    <h3 class="text-2xl font-bold text-blue-300 mb-2 relative z-10">${item.term || 'Untitled Term'}</h3>
+                                    <p class="text-gray-200 text-base relative z-10">${item.summary || 'Summary not available.'}</p>
+                                    <p class="text-blue-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
+                                </div>
+                            `).join('');
+                            document.querySelectorAll('#privacy-terms-container .info-card').forEach(card => {
+                                card.addEventListener('click', (event) => {
+                                    const index = parseInt(event.currentTarget.dataset.termIndex);
+                                    if (pageContent.privacy_data.length > index) {
+                                        const termData = pageContent.privacy_data[index];
+                                        modalTermTitle.textContent = termData.term || 'Details';
+                                        modalTermExplanation.textContent = termData.explanation || 'No detailed explanation available.';
+                                        privacyModal.style.display = 'flex';
                                     }
                                 });
-                            }, {
-                                threshold: 0.1 // Trigger when 10% of the section is visible
                             });
 
-                            sections.forEach(section => {
-                                observer.observe(section);
-                            });
+                            // Wellbeing Strategies Section (Flip Cards)
+                            wellbeingCardsContainer.innerHTML = pageContent.wellbeing_strategies.map((strategy, index) => `
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front flex flex-col items-center justify-center p-4">
+                                            <h3 class="text-2xl font-bold">${strategy.tip_title || 'Untitled Tip'}</h3>
+                                            <p class="text-gray-200 text-base mt-2">${strategy.tip_summary || 'Summary not available.'}</p>
+                                            <p class="text-blue-200 text-sm italic mt-2">Hover for details.</p>
+                                        </div>
+                                        <div class="flip-card-back flex items-center justify-center p-4">
+                                            <p class="text-md leading-relaxed">${strategy.tip_description || 'No detailed description available.'}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('');
+
+                            document.getElementById('conclusion-text').textContent = pageContent.conclusion;
 
                         } catch (jsonParseError) {
                             console.error("Error parsing JSON response:", jsonParseError);
-                            document.getElementById('hero-intro-text').textContent = "Error: Could not parse content from the AI. The response might be incomplete. Please try refreshing.";
-                            // Fallback to default content for all sections if parsing fails entirely
-                            document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
-                            document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content unavailable.</p>`;
-                            document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
-                            document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
-                            document.getElementById('conclusion-text').textContent = "Content unavailable.";
+                            document.getElementById('hero-intro-text').textContent = "Error: Could not load full content. The information might be incomplete. Please try refreshing the page.";
+                            // Fallback to default content for all sections if parsing fails entirely - already populated
                         }
                     } else {
                         console.error("API response text content is empty or not a string:", jsonString);
-                        document.getElementById('hero-intro-text').textContent = "Error: Received empty or invalid content from the AI.";
-                        // Fallback to default content for all sections
-                        document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
-                        document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content unavailable.</p>`;
-                        document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
-                        document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
-                        document.getElementById('conclusion-text').textContent = "Content unavailable.";
+                        document.getElementById('hero-intro-text').textContent = "Error: Received empty or invalid content. Please try refreshing the page.";
+                        // Fallback to default content for all sections - already populated
                     }
 
                 } else {
                     console.error("Failed to retrieve content from API response (missing candidates/parts):", result);
                     document.getElementById('hero-intro-text').textContent = "Failed to load content. Please try again.";
-                    // Fallback to default content for all sections
-                    document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
-                    document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content unavailable.</p>`;
-                    document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
-                    document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
-                    document.getElementById('conclusion-text').textContent = "Content unavailable.";
+                    // Fallback to default content for all sections - already populated
                 }
 
             } catch (error) {
                 console.error("Error fetching content:", error);
-                document.getElementById('hero-intro-text').textContent = "An error occurred while fetching content.";
-                // Fallback to default content for all sections
-                document.getElementById('positive-impacts-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
-                document.getElementById('negative-impact-display').innerHTML = `<p class="text-red-400 text-lg">Content unavailable.</p>`;
-                document.getElementById('privacy-terms-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
-                document.getElementById('wellbeing-cards-container').innerHTML = `<p class="col-span-full text-red-400 text-lg text-center mt-8">Content unavailable.</p>`;
-                document.getElementById('conclusion-text').textContent = "Content unavailable.";
+                document.getElementById('hero-intro-text').textContent = "An error occurred while fetching content. Please check your internet connection and try refreshing.";
+                // Fallback to default content for all sections - already populated
             } finally {
                 loadingOverlay.style.display = 'none'; // Hide loading overlay
             }
+
+            // Common Event Listeners (apply to both initial placeholders and dynamically loaded content)
+            const positiveImpactModal = document.getElementById('positiveImpactModal');
+            const privacyModal = document.getElementById('privacyModal');
+            const closePositiveModalBtn = positiveImpactModal.querySelector('.modal-close-button');
+            const modalCloseBtn = privacyModal.querySelector('.modal-close-button');
+
+            closePositiveModalBtn.onclick = () => positiveImpactModal.style.display = 'none';
+            modalCloseBtn.onclick = () => privacyModal.style.display = 'none';
+            window.onclick = (event) => {
+                if (event.target === privacyModal || event.target === positiveImpactModal) {
+                    privacyModal.style.display = 'none';
+                    positiveImpactModal.style.display = 'none';
+                }
+            };
+
+            const impactSlider = document.getElementById('impact-slider');
+            const sliderValueLabel = document.getElementById('slider-value-label');
+            const negativeImpactDisplay = document.getElementById('negative-impact-display');
+            const negativeShapesContainer = document.getElementById('negative-shapes-container');
+
+            function updateNegativeImpactDisplay(index) {
+                if (pageContent.negative_impacts.length > index) {
+                    const impact = pageContent.negative_impacts[index];
+                    negativeImpactDisplay.innerHTML = `
+                        <h3 class="text-3xl font-bold text-red-300 mb-4">${impact.title || 'Loading...'}</h3>
+                        <p class="text-gray-200 text-lg mb-6">${impact.text || 'Loading details...'}</p>
+                        <p class="text-red-200 text-xl italic mt-auto">
+                            "${impact.quote || 'Loading quote...'}"
+                        </p>
+                    `;
+                    sliderValueLabel.textContent = impact.title || '';
+                    requestAnimationFrame(() => {
+                        const sliderRect = impactSlider.getBoundingClientRect();
+                        const thumbWidth = 20;
+                        const value = parseInt(impactSlider.value);
+                        const max = parseInt(impactSlider.max);
+                        let thumbPositionPx = 0;
+                        if (max > 0) {
+                            thumbPositionPx = (sliderRect.width - thumbWidth) * (value / max) + (thumbWidth / 2);
+                        } else {
+                            thumbPositionPx = sliderRect.width / 2;
+                        }
+                        sliderValueLabel.style.left = `${thumbPositionPx}px`;
+                        sliderValueLabel.style.transform = `translateX(-50%)`;
+                    });
+
+                    negativeShapesContainer.innerHTML = '';
+                    const colors = ['rgba(255, 0, 0, 0.3)', 'rgba(255, 100, 0, 0.3)', 'rgba(255, 150, 0, 0.3)'];
+                    const positions = [
+                        { top: '10%', left: '15%', width: '80px', height: '80px', 'animation-delay': '0s' },
+                        { top: '30%', right: '20%', width: '120px', height: '120px', 'animation-delay': '2s' },
+                        { bottom: '20%', left: '25%', width: '100px', height: '100px', 'animation-delay': '4s' }
+                    ];
+                    for(let i = 0; i < Math.min(3, pageContent.negative_impacts.length); i++) {
+                        const shapeDiv = document.createElement('div');
+                        shapeDiv.className = 'fragmented-shape';
+                        Object.assign(shapeDiv.style, positions[i]);
+                        shapeDiv.style.backgroundColor = colors[index % colors.length];
+                        negativeShapesContainer.appendChild(shapeDiv);
+                    }
+                } else {
+                    negativeImpactDisplay.innerHTML = `<p class="text-red-400 text-lg">Content not available for this selection.</p>`;
+                }
+            }
+            impactSlider.oninput = (event) => updateNegativeImpactDisplay(parseInt(event.target.value));
+
+
+            // Apply scroll-triggered animations
+            const sections = document.querySelectorAll('.reveal-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            sections.forEach(section => {
+                observer.observe(section);
+            });
 
             // Smooth scrolling for "Start Exploring" button
             document.getElementById('start-exploring-btn').addEventListener('click', () => {
