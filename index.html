@@ -59,20 +59,6 @@
             animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
         }
 
-        /* Loading Spinner */
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #8e2de2;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         /* Scroll-triggered animation styles */
         .reveal-on-scroll {
             opacity: 0;
@@ -289,12 +275,6 @@
 </head>
 <body class="text-gray-100 antialiased">
 
-    <!-- Loading Overlay -->
-    <div id="loading-overlay" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-90 z-[9999]">
-        <div class="spinner"></div>
-        <p class="ml-4 text-xl text-purple-400">Loading your digital story...</p>
-    </div>
-
     <!-- Header -->
     <header class="fixed top-0 left-0 w-full bg-gradient-to-r from-purple-900 to-indigo-900 bg-opacity-70 backdrop-blur-sm z-50 p-4 shadow-lg rounded-b-xl">
         <nav class="container mx-auto flex justify-between items-center px-4">
@@ -318,9 +298,7 @@
             <h2 class="text-6xl md:text-7xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg">
                 YOUR ONLINE REFLECTION
             </h2>
-            <p id="hero-intro-text" class="text-2xl md:text-3xl text-gray-200 mb-10 leading-relaxed">
-                Social media is a huge part of our daily lives, changing how we connect, see ourselves, and experience the world. This presentation looks into how it truly affects our feelings and well-being, exploring both its helpful sides and its real challenges.
-            </p>
+            <p id="hero-intro-text" class="text-2xl md:text-3xl text-gray-200 mb-10 leading-relaxed"></p>
             <button id="start-exploring-btn" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-4 px-8 rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 ease-in-out animate-pulse-custom">
                 🔍 EXPLORE THE IMPACT
             </button>
@@ -346,22 +324,7 @@
             </p>
 
             <div id="positive-impacts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mt-8">
-                <!-- Placeholder cards for immediate display -->
-                <div class="info-card p-6 rounded-xl shadow-lg group relative overflow-hidden">
-                    <h3 class="text-2xl font-bold text-green-300 mb-2 relative z-10">Building Friendships & Support</h3>
-                    <p class="text-gray-200 text-base relative z-10">Find and strengthen connections with friends and family, and get support from others who understand you.</p>
-                    <p class="text-green-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
-                </div>
-                <div class="info-card p-6 rounded-xl shadow-lg group relative overflow-hidden">
-                    <h3 class="text-2xl font-bold text-green-300 mb-2 relative z-10">Learning & Sharing Ideas</h3>
-                    <p class="text-gray-200 text-base relative z-10">Discover new interests, explore different viewpoints, and share your own thoughts with a wider audience.</p>
-                    <p class="text-green-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
-                </div>
-                <div class="info-card p-6 rounded-xl shadow-lg group relative overflow-hidden">
-                    <h3 class="text-2xl font-bold text-green-300 mb-2 relative z-10">Expressing Yourself & Creativity</h3>
-                    <p class="text-gray-200 text-base relative z-10">Use social media to show your creativity, share your passions, and find your unique voice.</p>
-                    <p class="text-green-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
-                </div>
+                <!-- Content will be injected here by JavaScript -->
             </div>
         </div>
         <!-- Modal for Positive Impacts -->
@@ -401,12 +364,7 @@
             </div>
 
             <div id="negative-impact-display" class="bg-gray-800 bg-opacity-70 p-8 rounded-xl shadow-xl max-w-3xl mx-auto min-h-[300px] flex flex-col justify-center">
-                <!-- Placeholder content for immediate display -->
-                <h3 class="text-3xl font-bold text-red-300 mb-4">Feeling Anxious or Down</h3>
-                <p class="text-gray-200 text-lg mb-6">Spending too much time online, especially seeing curated highlight reels, can make us feel left out or not good enough. This can lead to feelings of sadness, anxiety, or even depression, as we constantly compare our real lives to others' seemingly perfect online ones.</p>
-                <p class="text-red-200 text-xl italic mt-auto">
-                    "Sometimes I scroll and just feel worse about myself. It's hard to remember it's not real life."
-                </p>
+                <!-- Content will be dynamically updated by JavaScript -->
             </div>
         </div>
     </section>
@@ -427,17 +385,7 @@
             </p>
 
             <div id="privacy-terms-container" class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mt-8">
-                <!-- Placeholder cards for immediate display -->
-                <div class="info-card p-6 rounded-xl shadow-lg group relative overflow-hidden">
-                    <h3 class="text-2xl font-bold text-blue-300 mb-2 relative z-10">Your Digital Shadow: What Stays Online?</h3>
-                    <p class="text-gray-200 text-base relative z-10">Everything you post, share, or even like online creates a lasting record, like a shadow that follows you.</p>
-                    <p class="text-blue-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
-                </div>
-                <div class="info-card p-6 rounded-xl shadow-lg group relative overflow-hidden">
-                    <h3 class="text-2xl font-bold text-blue-300 mb-2 relative z-10">Who Sees Your Stuff? Privacy Settings</h3>
-                    <p class="text-gray-200 text-base relative z-10">It's important to control who can see your personal information and posts using privacy settings.</p>
-                    <p class="text-blue-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
-                </div>
+                <!-- Content will be injected here by JavaScript -->
             </div>
         </div>
 
@@ -469,43 +417,7 @@
             </p>
 
             <div id="wellbeing-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mt-8">
-                <!-- Placeholder cards for immediate display -->
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front flex flex-col items-center justify-center p-4">
-                            <h3 class="text-2xl font-bold">Taking Control: Setting Boundaries</h3>
-                            <p class="text-gray-200 text-base mt-2">Decide when and how you use social media to feel more in control.</p>
-                            <p class="text-blue-200 text-sm italic mt-2">Hover for details.</p>
-                        </div>
-                        <div class="flip-card-back flex items-center justify-center p-4">
-                            <p class="text-md leading-relaxed">Set daily time limits for apps, turn off notifications, and create tech-free zones. This helps reduce constant urges to check your phone, giving you more time for real-life activities and improving focus and calmness.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front flex flex-col items-center justify-center p-4">
-                            <h3 class="text-2xl font-bold">Being Mindful: Think Before You Post</h3>
-                            <p class="text-gray-200 text-base mt-2">Consider how your posts might make you and others feel before sharing.</p>
-                            <p class="text-blue-200 text-sm italic mt-2">Hover for details.</p>
-                        </div>
-                        <div class="flip-card-back flex items-center justify-center p-4">
-                            <p class="text-md leading-relaxed">Pause before posting to think about your message and its potential impact. Ask yourself: "Is this kind? Is this true? Is this necessary?" This reduces regret and promotes positive interactions, making online spaces feel safer and more supportive for everyone.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front flex flex-col items-center justify-center p-4">
-                            <h3 class="text-2xl font-bold">Focusing on Real Connections</h3>
-                            <p class="text-gray-200 text-base mt-2">Balance online interactions with face-to-face time with friends and family.</p>
-                            <p class="text-blue-200 text-sm italic mt-2">Hover for details.</p>
-                        </div>
-                        <div class="flip-card-back flex items-center justify-center p-4">
-                            <p class="text-md leading-relaxed">Prioritize real-life meetups, phone calls, and shared activities with loved ones. While online connections are great, strong in-person bonds build deeper trust and emotional support, which are crucial for our overall happiness and sense of belonging.</p>
-                        </div>
-                    </div>
-                </div>
+                <!-- Content will be injected here by JavaScript -->
             </div>
         </div>
     </section>
@@ -520,9 +432,7 @@
             <h2 class="text-5xl md:text-6xl font-extrabold text-white mb-10 drop-shadow-lg">
                 ✨ Making Your Online Story Positive
             </h2>
-            <p id="conclusion-text" class="text-xl md:text-2xl text-gray-300 leading-relaxed mb-8">
-                The online world keeps changing, but you're always in charge of your experience. By understanding how social media affects your feelings, and by choosing healthy ways to use it, you can enjoy its good parts and avoid the bad. Your online future is all about using it wisely and happily.
-            </p>
+            <p id="conclusion-text" class="text-xl md:text-2xl text-gray-300 leading-relaxed mb-8"></p>
             <p class="text-lg md:text-xl text-gray-400">
                 Use it smartly. Feel good online.
             </p>
@@ -545,7 +455,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            const loadingOverlay = document.getElementById('loading-overlay');
             // Tone.js Music Setup
             let synth;
             let isMusicPlaying = false;
@@ -607,124 +516,82 @@
             });
 
 
-            // AI Content Generation
-            let chatHistory = [];
-            const prompt = `Generate comprehensive, clear, and relatable content for a single-page website about "Social Media's Impact on Wellbeing" for a Year 11 Standard English assignment. The content should be highly informative and directly address feelings and connections, suitable for a high-achieving student (17-20 marks). The total content should be substantial, roughly 800-900 words if all interactive elements are explored. Avoid advanced academic jargon where simpler, more direct terms convey the meaning equally well, focusing on impact on personal feelings and connections. DO NOT INCLUDE A REFLECTION.
-
-            The content should be structured as follows in a JSON format:
-            - **introduction**: A compelling opening paragraph (approx. 70-90 words) for the hero section, introducing social media's big role in our lives and how it deeply affects our personal feelings and connections. Use clear, engaging language.
-            - **positive_impacts**: An array of 3-4 objects, each describing a good way social media helps us feel. Each object should have:
-                - 'title': (e.g., "Finding Your Community & Support") - simple, direct title
-                - 'summary': A very quick, inviting snapshot (approx. 15-25 words) for the main card, focusing on feelings of belonging or connection.
-                - 'text': A detailed, thorough paragraph (approx. 80-120 words) for the modal, explaining how this impact helps people emotionally and socially, connecting to real-life feelings and building connections.
-                - 'fact': A simple, impactful real-life example or relatable statistic, like 'Many young people find comfort and friendship in online communities, especially when they feel alone, reducing feelings of isolation by up to 40%.'
-            - **negative_impacts**: An array of 3 objects, each describing a tough way social media can hurt our feelings. Each object should have:
-                - 'title': (e.g., "The Weight of Comparison & Self-Doubt") - direct, emotional, relatable title
-                - 'summary': A very quick, honest snapshot (approx. 15-25 words) for the main slider display, highlighting emotional struggles.
-                - 'text': A detailed, in-depth paragraph (approx. 90-140 words) for the full display, explaining the emotional and social reasons behind these struggles, like anxiety from constant scrolling or feeling less worthy.
-                - 'quote': A powerful, realistic quote reflecting emotional impact, like 'It feels like everyone else is living their best life, and I'm just watching from the sidelines. It makes me feel small and anxious.'
-            - **privacy_data**: An array of 2-3 objects explaining important terms about our online information. Each object should have:
-                - 'term': (e.g., "Your Digital Shadow: What Stays Online?") - simpler term
-                - 'summary': A very quick, easy-to-understand snapshot (approx. 15-25 words) for the main card, explaining what the term means for our personal data.
-                - 'explanation': A detailed explanation (approx. 70-100 words) for the modal, outlining its real-world impact on our privacy and sense of security, and the feelings associated with it.
-            - **wellbeing_strategies**: An array of 3-4 objects, each giving a practical tip for feeling better online. Each object should have:
-                - 'tip_title': (e.g., "Taking Control: Setting Boundaries") - actionable, empowering, clear title
-                - 'tip_summary': A very quick, encouraging snapshot (approx. 15-25 words) for the front of the flip card, focusing on practical actions.
-                - 'tip_description': A detailed explanation (approx. 70-100 words) for the back of the flip card, giving clear steps and explaining how these help our feelings and connections.
-            - **conclusion**: An uplifting and clear concluding paragraph (approx. 70-90 words) that brings everything together, focusing on how we can take control of our online experience to feel happier and more connected.
-
-            Ensure the language is approachable, empathetic, and impactful on feelings and connections. It should provide rich detail and nuanced points, suitable for a Year 11 English academic context, but with simplified vocabulary.`;
-
-            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-
-            const payload = {
-                contents: chatHistory,
-                generationConfig: {
-                    responseMimeType: "application/json",
-                    responseSchema: {
-                        type: "OBJECT",
-                        properties: {
-                            "introduction": { "type": "STRING" },
-                            "positive_impacts": {
-                                "type": "ARRAY",
-                                "items": {
-                                    "type": "OBJECT",
-                                    "properties": {
-                                        "title": { "type": "STRING" },
-                                        "summary": { "type": "STRING" },
-                                        "text": { "type": "STRING" },
-                                        "fact": { "type": "STRING" }
-                                    }
-                                }
-                            },
-                            "negative_impacts": {
-                                "type": "ARRAY",
-                                "items": {
-                                    "type": "OBJECT",
-                                    "properties": {
-                                        "title": { "type": "STRING" },
-                                        "summary": { "type": "STRING" },
-                                        "text": { "type": "STRING" },
-                                        "quote": { "type": "STRING" }
-                                    }
-                                }
-                            },
-                            "privacy_data": {
-                                "type": "ARRAY",
-                                "items": {
-                                    "type": "OBJECT",
-                                    "properties": {
-                                        "term": { "type": "STRING" },
-                                        "summary": { "type": "STRING" },
-                                        "explanation": { "type": "STRING" }
-                                    }
-                                }
-                            },
-                            "wellbeing_strategies": {
-                                "type": "ARRAY",
-                                "items": {
-                                    "type": "OBJECT",
-                                    "properties": {
-                                        "tip_title": { "type": "STRING" },
-                                        "tip_summary": { "type": "STRING" },
-                                        "tip_description": { "type": "STRING" }
-                                    }
-                                }
-                            },
-                            "conclusion": { "type": "STRING" }
-                        }
+            // Pre-generated static content
+            const pageContent = {
+                "introduction": "Social media is a huge part of our daily lives, changing how we connect, see ourselves, and experience the world. This presentation looks into how it truly affects our feelings and well-being, exploring both its helpful sides and its real challenges.",
+                "positive_impacts": [
+                    {
+                        "title": "Finding Your Community & Support",
+                        "summary": "Connect with people who share your interests and get amazing support when you need it most.",
+                        "text": "Social media makes it easier to find and join groups based on shared hobbies, struggles, or passions. This can create a strong sense of belonging, making you feel less alone, especially if you have unique interests or face specific challenges. Sharing experiences and getting words of encouragement from others who 'get it' can truly lift your spirits and build real connections, even online.",
+                        "fact": "Many young people find comfort and friendship in online communities, especially when they feel alone, reducing feelings of isolation by up to 40%."
+                    },
+                    {
+                        "title": "Staying Close to Loved Ones",
+                        "summary": "Keep up with friends and family, no matter where they are, and share life's big and small moments.",
+                        "text": "Social media bridges distances, letting you see what your loved ones are up to, share your own updates, and feel like you're still part of their daily lives. Seeing photos, sending quick messages, or even having video calls helps maintain important relationships, making sure you feel connected to your inner circle even when miles apart. This strengthens bonds and prevents feelings of drifting apart.",
+                        "fact": "Over 75% of social media users say it helps them stay connected with friends and family they don't see often."
+                    },
+                    {
+                        "title": "Learning & Growing Together",
+                        "summary": "Discover new ideas, explore different viewpoints, and share your own thoughts, helping everyone learn.",
+                        "text": "Online platforms are buzzing with information and different ways of thinking. You can learn new skills, follow experts, or join discussions that broaden your mind. Sharing your own ideas and getting feedback can boost your confidence and help you see things in new ways. This feeling of shared learning and growth can be really exciting and empowering.",
+                        "fact": "Around 60% of social media users learn something new every week from content they see online."
                     }
-                }
+                ],
+                "negative_impacts": [
+                    {
+                        "title": "The Weight of Comparison & Self-Doubt",
+                        "summary": "Constantly seeing perfect online lives can make you feel like you're not good enough.",
+                        "text": "When you endlessly scroll through everyone's highlight reels – perfect vacations, perfect bodies, perfect relationships – it's easy to start comparing your own life. This can lead to strong feelings of jealousy, envy, and a deep sense that your life isn't as exciting or successful. It chips away at your self-worth, making you doubt yourself and feel unhappy with what you have, because you're always measuring up against an unrealistic online ideal.",
+                        "quote": "It feels like everyone else is living their best life, and I'm just watching from the sidelines. It makes me feel small and anxious."
+                    },
+                    {
+                        "title": "Feeling Anxious or Down",
+                        "summary": "Too much screen time and online pressure can leave you feeling worried, stressed, or sad.",
+                        "text": "The constant 'on' nature of social media can make your brain feel overwhelmed. Always checking for likes, comments, or new posts can create a cycle of anxiety, making it hard to relax or focus. Seeing upsetting news, or even just the sheer volume of information, can contribute to feelings of stress, sadness, and even loneliness, despite being 'connected' to many people. This can make you feel disconnected from your real feelings and surroundings.",
+                        "quote": "I get this knot in my stomach if I don't check my phone for a bit. It’s like I’m missing out on something important."
+                    },
+                    {
+                        "title": "Online Bullying & Hurtful Words",
+                        "summary": "Unfortunately, social media can expose you to mean comments or bullying, which really hurts.",
+                        "text": "Social media, for all its good, can also be a place where people hide behind screens and say hurtful things. Being targeted by negative comments, rumours, or exclusion can cause deep emotional pain, embarrassment, and fear. It makes you feel unsafe and vulnerable online, affecting your self-confidence and making you hesitant to express yourself. The impact of these hurtful words can linger long after the comments are gone.",
+                        "quote": "Someone said something really mean about me online, and it still makes my stomach drop thinking about it. It just ruined my day, my week."
+                    }
+                ],
+                "privacy_data": [
+                    {
+                        "term": "Your Digital Shadow: What Stays Online?",
+                        "summary": "Every photo, comment, and like you make leaves a permanent mark online, like a shadow.",
+                        "explanation": "Every single thing you post, share, or even react to on social media becomes part of your 'digital shadow.' This information often stays online forever, even if you try to delete it. It means that future employers, universities, or even just curious people can find out a lot about you from years ago. This can feel a bit scary, as you might worry about past posts being misunderstood or used against you, affecting your future chances or how people see you."
+                    },
+                    {
+                        "term": "Who Sees Your Stuff? Privacy Settings",
+                        "summary": "You can control who sees your posts and personal info using special settings.",
+                        "explanation": "Privacy settings are your tools to decide who gets to see your online life. You can choose to share your posts only with friends, family, or the whole world. If your settings are too open, almost anyone can see your private thoughts and photos, which can feel unsettling and expose you to risks. Learning to use these settings wisely gives you a sense of control and safety, making your online space feel more personal and secure."
+                    }
+                ],
+                "wellbeing_strategies": [
+                    {
+                        "tip_title": "Taking Control: Setting Boundaries",
+                        "tip_summary": "Decide when and how you use social media to feel more in control and less overwhelmed.",
+                        "tip_description": "Set clear limits for yourself: maybe no social media after 9 PM, or only checking it for 30 minutes a day. Turn off notifications that aren't truly important. Create 'tech-free zones' in your home, like the dinner table or your bedroom. This isn't about missing out; it's about making space for real life. By doing this, you'll feel less tied to your phone, your mind will be calmer, and you'll have more time and energy for hobbies, sleep, and face-to-face connections."
+                    },
+                    {
+                        "tip_title": "Being Mindful: Think Before You Post",
+                        "tip_summary": "Pause and think about what you share and how it might make you and others feel.",
+                        "tip_description": "Before hitting 'post,' take a moment to breathe and ask yourself: 'Is this kind? Is this true? Is this helpful?' Think about how your words or pictures might be seen by different people. This practice helps reduce regrets later and encourages more positive interactions. When everyone is more thoughtful, online spaces become friendlier, more supportive, and safer places where you feel good about what you share and see."
+                    },
+                    {
+                        "tip_title": "Focusing on Real Connections",
+                        "tip_summary": "Remember that real-life friendships and family time are super important for your happiness.",
+                        "tip_description": "While online chats are fun, make sure you're also spending quality time with friends and family in person. Go for a walk, have a coffee, or just chat face-to-face. These real-life meetups build much deeper trust and emotional support that screens can't fully replace. Strong, close relationships outside of social media are key to feeling truly happy, understood, and supported in your life, giving you a strong base to stand on."
+                    }
+                ],
+                "conclusion": "The online world keeps changing, but you're always in charge of your experience. By understanding how social media affects your feelings, and by choosing healthy ways to use it, you can enjoy its good parts and avoid the bad. Your online future is all about using it wisely and happily."
             };
 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-            // Initialize pageContent with defaults for robust error handling AND immediate display
-            let pageContent = {
-                introduction: "Social media is a huge part of our daily lives, changing how we connect, see ourselves, and experience the world. This presentation looks into how it truly affects our feelings and well-being, exploring both its helpful sides and its real challenges.",
-                positive_impacts: [
-                    { title: "Building Friendships & Support", summary: "Find and strengthen connections with friends and family, and get support from others who understand you.", text: "Placeholder text for Building Friendships & Support.", fact: "Placeholder fact." },
-                    { title: "Learning & Sharing Ideas", summary: "Discover new interests, explore different viewpoints, and share your own thoughts with a wider audience.", text: "Placeholder text for Learning & Sharing Ideas.", fact: "Placeholder fact." },
-                    { title: "Expressing Yourself & Creativity", summary: "Use social media to show your creativity, share your passions, and find your unique voice.", text: "Placeholder text for Expressing Yourself & Creativity.", fact: "Placeholder fact." }
-                ],
-                negative_impacts: [
-                    { title: "Feeling Anxious or Down", summary: "Constant exposure to perfect online lives can lead to feelings of sadness, worry, or not being good enough.", text: "Spending too much time online, especially seeing curated highlight reels, can make us feel left out or not good enough. This can lead to feelings of sadness, anxiety, or even depression, as we constantly compare our real lives to others' seemingly perfect online ones.", quote: "Sometimes I scroll and just feel worse about myself. It's hard to remember it's not real life." },
-                    { title: "Comparing Yourself", summary: "The endless scroll of perfect lives can make you feel inadequate and constantly compare your life to others.", text: "Placeholder text for Comparing Yourself.", quote: "Placeholder quote." },
-                    { title: "Online Bullying", summary: "Sadly, social media can expose individuals to hurtful comments or cyberbullying, impacting their emotional safety.", text: "Placeholder text for Online Bullying.", quote: "Placeholder quote." }
-                ],
-                privacy_data: [
-                    { term: "Your Digital Shadow: What Stays Online?", summary: "Everything you post, share, or even like online creates a lasting record, like a shadow that follows you.", explanation: "Placeholder explanation." },
-                    { term: "Who Sees Your Stuff? Privacy Settings", summary: "It's important to control who can see your personal information and posts using privacy settings.", explanation: "Placeholder explanation." }
-                ],
-                wellbeing_strategies: [
-                    { tip_title: "Taking Control: Setting Boundaries", tip_summary: "Decide when and how you use social media to feel more in control.", tip_description: "Set daily time limits for apps, turn off notifications, and create tech-free zones. This helps reduce constant urges to check your phone, giving you more time for real-life activities and improving focus and calmness." },
-                    { tip_title: "Being Mindful: Think Before You Post", tip_summary: "Consider how your posts might make you and others feel before sharing.", tip_description: "Pause before posting to think about your message and its potential impact. Ask yourself: 'Is this kind? Is this true? Is this necessary?' This reduces regret and promotes positive interactions, making online spaces feel safer and more supportive for everyone." },
-                    { tip_title: "Focusing on Real Connections", tip_summary: "Balance online interactions with face-to-face time with friends and family.", tip_description: "Prioritize real-life meetups, phone calls, and shared activities with loved ones. While online connections are great, strong in-person bonds build deeper trust and emotional support, which are crucial for our overall happiness and sense of belonging." }
-                ],
-                conclusion: "The online world keeps changing, but you're always in charge of your experience. By understanding how social media affects your feelings, and by choosing healthy ways to use it, you can enjoy its good parts and avoid the bad. Your online future is all about using it wisely and happily."
-            };
-
-            // Immediately populate the DOM with placeholder content
+            // Immediately populate the DOM with the static content
             document.getElementById('hero-intro-text').textContent = pageContent.introduction;
 
             const positiveImpactsContainer = document.getElementById('positive-impacts-container');
@@ -738,21 +605,25 @@
             `).join('');
 
             const negativeImpactDisplay = document.getElementById('negative-impact-display');
+            const impactSlider = document.getElementById('impact-slider');
             // Ensure negative_impacts has at least one element for initial display
             if (pageContent.negative_impacts.length > 0) {
                 const initialImpact = pageContent.negative_impacts[0];
                 negativeImpactDisplay.innerHTML = `
-                    <h3 class="text-3xl font-bold text-red-300 mb-4">${initialImpact.title || 'Untitled'}</h3>
-                    <p class="text-gray-200 text-lg mb-6">${initialImpact.text || 'No detailed text available.'}</p>
+                    <h3 class="text-3xl font-bold text-red-300 mb-4">${initialImpact.title || 'Loading...'}</h3>
+                    <p class="text-gray-200 text-lg mb-6">${initialImpact.text || 'Loading details...'}</p>
                     <p class="text-red-200 text-xl italic mt-auto">
-                        "${initialImpact.quote || 'No quote available.'}"
+                        "${initialImpact.quote || 'Loading quote...'}"
                     </p>
                 `;
+                impactSlider.max = pageContent.negative_impacts.length - 1;
+                impactSlider.disabled = false;
             } else {
-                negativeImpactDisplay.innerHTML = `<p class="text-red-400 text-lg">Loading challenges...</p>`;
+                negativeImpactDisplay.innerHTML = `<p class="text-red-400 text-lg">Negative impacts content could not be loaded.</p>`;
+                impactSlider.max = 0;
+                impactSlider.disabled = true;
             }
-            document.getElementById('impact-slider').max = pageContent.negative_impacts.length > 0 ? pageContent.negative_impacts.length - 1 : 0;
-
+            
 
             const privacyTermsContainer = document.getElementById('privacy-terms-container');
             privacyTermsContainer.innerHTML = pageContent.privacy_data.map((item, index) => `
@@ -782,167 +653,7 @@
 
             document.getElementById('conclusion-text').textContent = pageContent.conclusion;
 
-            // --- Begin Fetching AI Content ---
-            loadingOverlay.style.display = 'flex'; // Ensure loading overlay is visible during API call
-
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            const prompt = `Generate comprehensive, clear, and relatable content for a single-page website about "Social Media's Impact on Wellbeing" for a Year 11 Standard English assignment. The content should be highly informative and directly address feelings and connections, suitable for a high-achieving student (17-20 marks). The total content should be substantial, roughly 800-900 words if all interactive elements are explored. Avoid advanced academic jargon where simpler, more direct terms convey the meaning equally well, focusing on impact on personal feelings and connections. DO NOT INCLUDE A REFLECTION.
-
-            The content should be structured as follows in a JSON format:
-            - **introduction**: A compelling opening paragraph (approx. 70-90 words) for the hero section, introducing social media's big role in our lives and how it deeply affects our personal feelings and connections. Use clear, engaging language.
-            - **positive_impacts**: An array of 3-4 objects, each describing a good way social media helps us feel. Each object should have:
-                - 'title': (e.g., "Finding Your Community & Support") - simple, direct title
-                - 'summary': A very quick, inviting snapshot (approx. 15-25 words) for the main card, focusing on feelings of belonging or connection.
-                - 'text': A detailed, thorough paragraph (approx. 80-120 words) for the modal, explaining how this impact helps people emotionally and socially, connecting to real-life feelings and building connections.
-                - 'fact': A simple, impactful real-life example or relatable statistic, like 'Many young people find comfort and friendship in online communities, especially when they feel alone, reducing feelings of isolation by up to 40%.'
-            - **negative_impacts**: An array of 3 objects, each describing a tough way social media can hurt our feelings. Each object should have:
-                - 'title': (e.g., "The Weight of Comparison & Self-Doubt") - direct, emotional, relatable title
-                - 'summary': A very quick, honest snapshot (approx. 15-25 words) for the main slider display, highlighting emotional struggles.
-                - 'text': A detailed, in-depth paragraph (approx. 90-140 words) for the full display, explaining the emotional and social reasons behind these struggles, like anxiety from constant scrolling or feeling less worthy.
-                - 'quote': A powerful, realistic quote reflecting emotional impact, like 'It feels like everyone else is living their best life, and I'm just watching from the sidelines. It makes me feel small and anxious.'
-            - **privacy_data**: An array of 2-3 objects explaining important terms about our online information. Each object should have:
-                - 'term': (e.g., "Your Digital Shadow: What Stays Online?") - simpler term
-                - 'summary': A very quick, easy-to-understand snapshot (approx. 15-25 words) for the main card, explaining what the term means for our personal data.
-                - 'explanation': A detailed explanation (approx. 70-100 words) for the modal, outlining its real-world impact on our privacy and sense of security, and the feelings associated with it.
-            - **wellbeing_strategies**: An array of 3-4 objects, each giving a practical tip for feeling better online. Each object should have:
-                - 'tip_title': (e.g., "Taking Control: Setting Boundaries") - actionable, empowering, clear title
-                - 'tip_summary': A very quick, encouraging snapshot (approx. 15-25 words) for the front of the flip card, focusing on practical actions.
-                - 'tip_description': A detailed explanation (approx. 70-100 words) for the back of the flip card, giving clear steps and explaining how these help our feelings and connections.
-            - **conclusion**: An uplifting and clear concluding paragraph (approx. 70-90 words) that brings everything together, focusing on how we can take control of our online experience to feel happier and more connected.
-
-            Ensure the language is approachable, empathetic, and impactful on feelings and connections. It should provide rich detail and nuanced points, suitable for a Year 11 English academic context, but with simplified vocabulary.`;
-
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: prompt }] }] })
-                });
-
-                const result = await response.json();
-
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content && result.candidates[0].content.parts &&
-                    result.candidates[0].content.parts.length > 0) {
-                    const jsonString = result.candidates[0].content.parts[0].text;
-                    
-                    if (typeof jsonString === 'string' && jsonString.length > 0) {
-                        console.log("Raw JSON string received:", jsonString); // Log the raw JSON string for debugging
-                        try {
-                            const parsedContent = JSON.parse(jsonString);
-                            
-                            // Assign parsed content, using defaults if a property is missing in the parsed object
-                            Object.assign(pageContent, {
-                                introduction: parsedContent.introduction || pageContent.introduction,
-                                positive_impacts: parsedContent.positive_impacts || [],
-                                negative_impacts: parsedContent.negative_impacts || [],
-                                privacy_data: parsedContent.privacy_data || [],
-                                wellbeing_strategies: parsedContent.wellbeing_strategies || [],
-                                conclusion: parsedContent.conclusion || pageContent.conclusion
-                            });
-                            console.log("Generated Content:", pageContent);
-
-                            // --- Update DOM with AI Content ---
-                            document.getElementById('hero-intro-text').textContent = pageContent.introduction;
-
-                            // Section 2: Positive Impacts (Cards with Modals)
-                            positiveImpactsContainer.innerHTML = pageContent.positive_impacts.map((impact, index) => `
-                                <div class="info-card p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer group relative overflow-hidden" data-impact-index="${index}">
-                                    <div class="absolute inset-0 bg-gradient-to-br from-green-500 to-blue-500 opacity-20 group-hover:opacity-40 transition-opacity duration-300 rounded-xl"></div>
-                                    <h3 class="text-2xl font-bold text-green-300 mb-2 relative z-10">${impact.title || 'Untitled Impact'}</h3>
-                                    <p class="text-gray-200 text-base relative z-10">${impact.summary || 'Summary not available.'}</p>
-                                    <p class="text-green-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
-                                </div>
-                            `).join('');
-                            document.querySelectorAll('#positive-impacts-container .info-card').forEach(card => {
-                                card.addEventListener('click', (event) => {
-                                    const index = parseInt(event.currentTarget.dataset.impactIndex);
-                                    if (pageContent.positive_impacts.length > index) {
-                                        const impactData = pageContent.positive_impacts[index];
-                                        positiveModalTitle.textContent = impactData.title || 'Details';
-                                        positiveModalText.textContent = impactData.text || 'No detailed text available.';
-                                        positiveModalFact.textContent = `Fact: ${impactData.fact || 'No fact available.'}`;
-                                        positiveImpactModal.style.display = 'flex';
-                                    }
-                                });
-                            });
-
-                            // Negative Impacts Section (Slider)
-                            if (pageContent.negative_impacts.length > 0) {
-                                impactSlider.max = pageContent.negative_impacts.length - 1;
-                                impactSlider.disabled = false;
-                                updateNegativeImpactDisplay(parseInt(impactSlider.value)); // Update with AI content
-                            } else {
-                                impactSlider.max = 0;
-                                impactSlider.disabled = true;
-                                negativeImpactDisplay.innerHTML = `<p class="text-red-400 text-lg">Negative impacts content could not be loaded.</p>`;
-                            }
-
-                            // Privacy/Data Section (Cards with Modals)
-                            privacyTermsContainer.innerHTML = pageContent.privacy_data.map((item, index) => `
-                                <div class="info-card p-6 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300 ease-in-out cursor-pointer group relative overflow-hidden" data-term-index="${index}">
-                                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-20 group-hover:opacity-40 transition-opacity duration-300 rounded-xl"></div>
-                                    <h3 class="text-2xl font-bold text-blue-300 mb-2 relative z-10">${item.term || 'Untitled Term'}</h3>
-                                    <p class="text-gray-200 text-base relative z-10">${item.summary || 'Summary not available.'}</p>
-                                    <p class="text-blue-200 text-sm italic mt-2 relative z-10">Click for more details.</p>
-                                </div>
-                            `).join('');
-                            document.querySelectorAll('#privacy-terms-container .info-card').forEach(card => {
-                                card.addEventListener('click', (event) => {
-                                    const index = parseInt(event.currentTarget.dataset.termIndex);
-                                    if (pageContent.privacy_data.length > index) {
-                                        const termData = pageContent.privacy_data[index];
-                                        modalTermTitle.textContent = termData.term || 'Details';
-                                        modalTermExplanation.textContent = termData.explanation || 'No detailed explanation available.';
-                                        privacyModal.style.display = 'flex';
-                                    }
-                                });
-                            });
-
-                            // Wellbeing Strategies Section (Flip Cards)
-                            wellbeingCardsContainer.innerHTML = pageContent.wellbeing_strategies.map((strategy, index) => `
-                                <div class="flip-card">
-                                    <div class="flip-card-inner">
-                                        <div class="flip-card-front flex flex-col items-center justify-center p-4">
-                                            <h3 class="text-2xl font-bold">${strategy.tip_title || 'Untitled Tip'}</h3>
-                                            <p class="text-gray-200 text-base mt-2">${strategy.tip_summary || 'Summary not available.'}</p>
-                                            <p class="text-blue-200 text-sm italic mt-2">Hover for details.</p>
-                                        </div>
-                                        <div class="flip-card-back flex items-center justify-center p-4">
-                                            <p class="text-md leading-relaxed">${strategy.tip_description || 'No detailed description available.'}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            `).join('');
-
-                            document.getElementById('conclusion-text').textContent = pageContent.conclusion;
-
-                        } catch (jsonParseError) {
-                            console.error("Error parsing JSON response:", jsonParseError);
-                            document.getElementById('hero-intro-text').textContent = "Error: Could not load full content. The information might be incomplete. Please try refreshing the page.";
-                            // Fallback to default content for all sections if parsing fails entirely - already populated
-                        }
-                    } else {
-                        console.error("API response text content is empty or not a string:", jsonString);
-                        document.getElementById('hero-intro-text').textContent = "Error: Received empty or invalid content. Please try refreshing the page.";
-                        // Fallback to default content for all sections - already populated
-                    }
-
-                } else {
-                    console.error("Failed to retrieve content from API response (missing candidates/parts):", result);
-                    document.getElementById('hero-intro-text').textContent = "Failed to load content. Please try again.";
-                    // Fallback to default content for all sections - already populated
-                }
-
-            } catch (error) {
-                console.error("Error fetching content:", error);
-                document.getElementById('hero-intro-text').textContent = "An error occurred while fetching content. Please check your internet connection and try refreshing.";
-                // Fallback to default content for all sections - already populated
-            } finally {
-                loadingOverlay.style.display = 'none'; // Hide loading overlay
-            }
-
-            // Common Event Listeners (apply to both initial placeholders and dynamically loaded content)
+            // Common Event Listeners
             const positiveImpactModal = document.getElementById('positiveImpactModal');
             const privacyModal = document.getElementById('privacyModal');
             const closePositiveModalBtn = positiveImpactModal.querySelector('.modal-close-button');
@@ -957,9 +668,7 @@
                 }
             };
 
-            const impactSlider = document.getElementById('impact-slider');
             const sliderValueLabel = document.getElementById('slider-value-label');
-            const negativeImpactDisplay = document.getElementById('negative-impact-display');
             const negativeShapesContainer = document.getElementById('negative-shapes-container');
 
             function updateNegativeImpactDisplay(index) {
