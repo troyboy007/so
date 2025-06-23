@@ -454,7 +454,8 @@
     </button>
 
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
+        document.addEventListener('DOMContentLoaded', () => { // Removed 'async' from here as there's no top-level await now
+
             // Tone.js Music Setup
             let synth;
             let isMusicPlaying = false;
@@ -463,7 +464,7 @@
 
             async function setupMusic() {
                 try {
-                    await Tone.start();
+                    await Tone.start(); // Unlock audio context
                     console.log("Audio context started. User interacted.");
                     synth = new Tone.Synth({
                         oscillator: {
@@ -482,7 +483,7 @@
                     let noteIndex = 0;
 
                     Tone.Transport.scheduleRepeat(time => {
-                        if (isMusicPlaying && synth) {
+                        if (isMusicPlaying && synth) { // Ensure music is still playing and synth exists
                             // Play a random note from the chord to make it less repetitive
                             const randomNote = notes[Math.floor(Math.random() * notes.length)];
                             synth.triggerAttackRelease(randomNote, "2n", time); // Play for half a second
@@ -498,7 +499,7 @@
             }
 
             musicToggleBtn.addEventListener('click', async () => {
-                if (!synth) { // Setup music only on first click
+                if (!synth) { // Setup music only on first click to ensure audio context is ready
                     await setupMusic();
                 }
 
@@ -508,7 +509,7 @@
                     musicIcon.textContent = '🔇';
                     musicToggleBtn.innerHTML = '<span id="music-icon">🔇</span> Music Off';
                 } else {
-                    Tone.Transport.start();
+                    Tone.Transport.start(); // Start the transport to play the notes
                     isMusicPlaying = true;
                     musicIcon.textContent = '🎶';
                     musicToggleBtn.innerHTML = '<span id="music-icon">🎶</span> Music On';
@@ -516,7 +517,7 @@
             });
 
 
-            // Pre-generated static content
+            // Pre-generated static content - ALL content is here
             const pageContent = {
                 "introduction": "Social media is a huge part of our daily lives, changing how we connect, see ourselves, and experience the world. This presentation looks into how it truly affects our feelings and well-being, exploring both its helpful sides and its real challenges.",
                 "positive_impacts": [
@@ -653,11 +654,39 @@
 
             document.getElementById('conclusion-text').textContent = pageContent.conclusion;
 
-            // Common Event Listeners
+            // Common Event Listeners - attached AFTER content is rendered
             const positiveImpactModal = document.getElementById('positiveImpactModal');
             const privacyModal = document.getElementById('privacyModal');
             const closePositiveModalBtn = positiveImpactModal.querySelector('.modal-close-button');
             const modalCloseBtn = privacyModal.querySelector('.modal-close-button');
+
+            // Attach listeners for Positive Impacts cards
+            document.querySelectorAll('#positive-impacts-container .info-card').forEach(card => {
+                card.addEventListener('click', (event) => {
+                    const index = parseInt(event.currentTarget.dataset.impactIndex);
+                    if (pageContent.positive_impacts.length > index) {
+                        const impactData = pageContent.positive_impacts[index];
+                        document.getElementById('positive-modal-title').textContent = impactData.title || 'Details';
+                        document.getElementById('positive-modal-text').textContent = impactData.text || 'No detailed text available.';
+                        document.getElementById('positive-modal-fact').textContent = `Fact: ${impactData.fact || 'No fact available.'}`;
+                        positiveImpactModal.style.display = 'flex';
+                    }
+                });
+            });
+
+            // Attach listeners for Privacy Terms cards
+            document.querySelectorAll('#privacy-terms-container .info-card').forEach(card => {
+                card.addEventListener('click', (event) => {
+                    const index = parseInt(event.currentTarget.dataset.termIndex);
+                    if (pageContent.privacy_data.length > index) {
+                        const termData = pageContent.privacy_data[index];
+                        document.getElementById('modal-term-title').textContent = termData.term || 'Details';
+                        document.getElementById('modal-term-explanation').textContent = termData.explanation || 'No detailed explanation available.';
+                        privacyModal.style.display = 'flex';
+                    }
+                });
+            });
+
 
             closePositiveModalBtn.onclick = () => positiveImpactModal.style.display = 'none';
             modalCloseBtn.onclick = () => privacyModal.style.display = 'none';
@@ -714,6 +743,10 @@
                 } else {
                     negativeImpactDisplay.innerHTML = `<p class="text-red-400 text-lg">Content not available for this selection.</p>`;
                 }
+            }
+            // Initialize the negative impact display with the first item
+            if (pageContent.negative_impacts.length > 0) {
+                updateNegativeImpactDisplay(0);
             }
             impactSlider.oninput = (event) => updateNegativeImpactDisplay(parseInt(event.target.value));
 
