@@ -454,7 +454,7 @@
     </button>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => { // Removed 'async' from here as there's no top-level await now
+        document.addEventListener('DOMContentLoaded', () => {
 
             // Tone.js Music Setup
             let synth;
@@ -654,36 +654,41 @@
 
             document.getElementById('conclusion-text').textContent = pageContent.conclusion;
 
-            // Common Event Listeners - attached AFTER content is rendered
+            // Common Event Listeners - attached AFTER content is rendered to ensure elements exist
             const positiveImpactModal = document.getElementById('positiveImpactModal');
             const privacyModal = document.getElementById('privacyModal');
             const closePositiveModalBtn = positiveImpactModal.querySelector('.modal-close-button');
             const modalCloseBtn = privacyModal.querySelector('.modal-close-button');
 
             // Attach listeners for Positive Impacts cards
-            document.querySelectorAll('#positive-impacts-container .info-card').forEach(card => {
-                card.addEventListener('click', (event) => {
-                    const index = parseInt(event.currentTarget.dataset.impactIndex);
-                    if (pageContent.positive_impacts.length > index) {
-                        const impactData = pageContent.positive_impacts[index];
-                        document.getElementById('positive-modal-title').textContent = impactData.title || 'Details';
-                        document.getElementById('positive-modal-text').textContent = impactData.text || 'No detailed text available.';
-                        document.getElementById('positive-modal-fact').textContent = `Fact: ${impactData.fact || 'No fact available.'}`;
-                        positiveImpactModal.style.display = 'flex';
-                    }
+            // Using requestAnimationFrame to ensure the DOM has updated
+            requestAnimationFrame(() => {
+                document.querySelectorAll('#positive-impacts-container .info-card').forEach(card => {
+                    card.addEventListener('click', (event) => {
+                        const index = parseInt(event.currentTarget.dataset.impactIndex);
+                        if (pageContent.positive_impacts.length > index) {
+                            const impactData = pageContent.positive_impacts[index];
+                            document.getElementById('positive-modal-title').textContent = impactData.title || 'Details';
+                            document.getElementById('positive-modal-text').textContent = impactData.text || 'No detailed text available.';
+                            document.getElementById('positive-modal-fact').textContent = `Fact: ${impactData.fact || 'No fact available.'}`;
+                            positiveImpactModal.style.display = 'flex';
+                            console.log(`Positive Impact Card Clicked: ${impactData.title}`);
+                        }
+                    });
                 });
-            });
 
-            // Attach listeners for Privacy Terms cards
-            document.querySelectorAll('#privacy-terms-container .info-card').forEach(card => {
-                card.addEventListener('click', (event) => {
-                    const index = parseInt(event.currentTarget.dataset.termIndex);
-                    if (pageContent.privacy_data.length > index) {
-                        const termData = pageContent.privacy_data[index];
-                        document.getElementById('modal-term-title').textContent = termData.term || 'Details';
-                        document.getElementById('modal-term-explanation').textContent = termData.explanation || 'No detailed explanation available.';
-                        privacyModal.style.display = 'flex';
-                    }
+                // Attach listeners for Privacy Terms cards
+                document.querySelectorAll('#privacy-terms-container .info-card').forEach(card => {
+                    card.addEventListener('click', (event) => {
+                        const index = parseInt(event.currentTarget.dataset.termIndex);
+                        if (pageContent.privacy_data.length > index) {
+                            const termData = pageContent.privacy_data[index];
+                            document.getElementById('modal-term-title').textContent = termData.term || 'Details';
+                            document.getElementById('modal-term-explanation').textContent = termData.explanation || 'No detailed explanation available.';
+                            privacyModal.style.display = 'flex';
+                            console.log(`Privacy Term Card Clicked: ${termData.term}`);
+                        }
+                    });
                 });
             });
 
